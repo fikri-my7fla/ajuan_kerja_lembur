@@ -14,8 +14,11 @@ class Model_users extends CI_Model {
         //cari username lalu lakukan validasi
         $this->db->where('username', $username);
         $query = $this->db->get($this->table)->row();
+
+        if (!$query) return 1;
+
         $hash = $query->password;
         if (md5($password) != $hash) return 2;
         return $query;
-    }
+    } 
 }

@@ -8,6 +8,7 @@
 
 <body id="page-top">
 	<?php $this->load->view('admin/_partials/nav.php') ?>
+	<?php $this->load->view('admin/_partials/sidebar.php') ?>
 	<div id="wrapper">
 		<div id="content-wrapper">
 			<div class="container-fluid">

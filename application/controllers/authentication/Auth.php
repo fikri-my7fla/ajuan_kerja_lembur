@@ -12,27 +12,26 @@ class Auth extends CI_Controller{
 
     public function cekAkun(){
     //membuat validasi login
-    $username = $this->input->post('username');
-    $password = $this->input->post('password');
-
+    $username = $this->input->post('username',TRUE);
+    $password = $this->input->post('password',TRUE);
     $query = $this->model_users->cekAkun($username, $password);
-
-        if ($query === 0) {
-            return "Username dan Password Salah";
-        } elseif($query === 1) {
-            return "username Salah!";
+    
+        if ($query === 1) {
+            return "Username Tidak diTemukan!";
         } elseif ($query === 2) {
-            return "password Salah!";
+            return "Password Salah!";
         }
         else {
-        //membuat session dengan nama userdata
-        $userData = array(
-            'username' => $query->username,
-            'type' => $query->type,
-            'logged_in' => TRUE
-        );
-        $this->session->set_userdata($userData);
-        return TRUE;
+            //membuat session dengan nama userdata
+            $userData = array(
+                'username' => $query->username,
+                'password' => $query->password,
+                'pegawai_id' =>$query->pegawai_id,
+                'type' => $query->type,
+                'logged_in' => TRUE,
+            );
+            $this->session->set_userdata($userData);
+            return TRUE;
         }
     }
 
@@ -61,8 +60,8 @@ class Auth extends CI_Controller{
 
             //Jika bernilai FALSE maka tampilkan error
             else{
-                // $data['error'] = $error;
-            $this->load->view('authentication/login'/*, $data*/);
+            $data['error'] = $error;
+            $this->load->view('authentication/login',$data);
                 }
             }
         //Jika tidak maka alihkan kembali ke halaman login
