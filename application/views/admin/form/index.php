@@ -21,11 +21,11 @@
 				<?php } ?>
 				<div class="card">
 					<div class="card-body">
-						<br>
+						<br />
 						<h2 class="card-title text-center">Form Ajuan Lembur Pegawai</h2>
-						<br>
-						<br>
-						<br>
+						<br />
+						<br />
+						<br />
 						<div align="center">
 							<a href="<?= base_url('admin/form/tambah');?>" class="btn btn-success">Tambah</a>
 						</div>
