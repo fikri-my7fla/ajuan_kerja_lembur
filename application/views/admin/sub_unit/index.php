@@ -13,78 +13,134 @@
 		<?php $this->load->view('admin/_partials/sidebar.php') ?>
 		<div class="page-wrapper">
 			<div class="container-fluid">
-			<?php if ($this->session->flashdata('success')): ?>
-				<div class="alert alert-success" role="alert">
-					<?php echo $this->session->flashdata('success'); ?>
+				<?php $data=$this->session->flashdata('sukses'); if($data!=""){ ?>
+				<div id="notifikasi" class="alert alert-success"><strong>Sukses! </strong> <?=$data;?><button
+						type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
 				</div>
-				<?php endif; ?>
+				<?php } ?>
 				<div class="card mb-3">
-					<div class="card-header">
-						<a class="btn text-success" data-toggle="collapse" data-target="#collapseSubUnit"
-							aria-expanded="false" aria-controls="collapseSubUnit">
-							<span class="hide-menu">
-								Add New
-							</span>
-						</a>
-					</div>
-					<div class="collapse" id="collapseSubUnit">
-						<div class="card card-body">
-						<form action="<?php base_url('admin/subunit/add') ?>" method="post" enctype="multipart/form-data" >
-							<div class="form-group">
-								<label for="Sub_unit">Sub Unit</label>
-								<input class="form-control <?php echo form_error('sub_unit') ? 'is-invalid':'' ?>"
-								type="text" name="sub_unit" placeholder="Sub Unit" />
-								<div class="invalid-feedback">
-									<?php echo form_error('name') ?>
+					<div class="card-body">
+						<div class="">
+							<br>
+							<h2 class="card-title text-center">Data Jenis Pekerjaan</h2>
+							<!-- collapse -->
+							<button class="btn btn-success mb-3" data-toggle="collapse"
+								data-target="#tambahgan">Tambah</button>
+							<br>
+							<div id="tambahgan" class="collapse mb-3">
+								<div class="card-header">
+									<form action="<?= base_url('admin/subunit/tambah')?>" method="post">
+										<input type="hidden" name="id_jenis">
+										<p>Sub unit #</p>
+										<div class="form-group form-inline">
+											<input type="text" name="sub_unit" id="sub_unit" class="form-control"
+												required placeholder="Masukkan Data">
+											<button type="submit" value="submit"
+												class="btn btn-outline-success">Simpan</button>
+										</div>
+									</form>
 								</div>
 							</div>
-							<input class="btn btn-success" type="submit" name="btn" value="Save" />
-						</form>
+							<!-- end collps -->
+							<!-- bungkus tabel nya gan -->
+							<div class="table-responsive">
+								<table class="table table-hover" id="table">
+									<thead>
+										<tr>
+											<th>NO</th>
+											<th>sub unit</th>
+											<th style="text-align: right;">Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										<?php if($jenis_pekerjaan->num_rows() > 0): ?>
+										<?php $index = 1; ?>
+										<?php foreach($jenis_pekerjaan->result() as $jp): ?>
+										<tr>
+											<td><?php echo $index++; ?></td>
+											<td><?php echo $jp->sub_unit; ?></td>
+											<td style="text-align: right;">
+												<a data-toggle="modal" data-target="#modal-edit<?=$jp->id_jenis;?>"
+													class="btn btn-warning btn-circle" data-popup="tooltip"
+													data-placement="top" title="Edit Data"><i
+														class="fa fa-pencil-alt"></i></a>
+												<a href="<?= site_url(''); ?>admin/subunit/hapus/<?= $jp->id_jenis; ?>"
+													class="btn btn-danger btn-circle"
+													onclick="return confirm('yakin?');"><i class="fas fa-trash"></i></a>
+											</td>
+										</tr>
+										<?php endforeach; ?>
+										<?php else: ?>
+										<tr>
+											<td colspan="6" style="text-align: center;">Data tidak tersedia</td>
+										</tr>
+										<?php endif; ?>
+									</tbody>
+								</table>
+							</div>
+							<!-- bungkus nya tabel -->
 						</div>
+						<!-- card -->
 					</div>
-					<div class="card-body">
-
-						<div class="table-responsive">
-							<table class="table table-hover" id="dataTable" width="100%" cellspacing="0">
-								<thead>
-									<tr>
-										<th>ID</th>
-										<th>Jenis Pekerjaan</th>
-										<th>Action</th>
-									</tr>
-								</thead>
-								<tbody>
-									<?php foreach ($jenis_pekerjaan as $jp): ?>
-									<tr>
-										<td width="150">
-											<?php echo $jp->id_jenis ?>
-										</td>
-										<td>
-											<?php echo $jp->sub_unit ?>
-										</td>
-										<td>
-											<a href="<?php echo site_url('admin/subunit/edit/'.$jp->id_jenis) ?>"
-												class="btn btn-outline-warning">
-												<i class="fa fa-edit"></i>
-												Edit</a>
-											<a onclick="deleteConfirm('<?php echo site_url('admin/subunit/delete/'.$jp->id_jenis) ?>')"
-												href="#!" class="btn btn-outline-danger">
-												<i class="fa fa-trash"></i>
-												Hapus</a>
-										</td>
-									</tr>
-									<?php endforeach; ?>
-
-								</tbody>
-							</table>
-						</div>
-					</div>
+					<!-- bodi -->
 				</div>
+				<!-- kartu yang mb -->
+				<?php $this->load->view('admin/_partials/footer.php') ?>
 			</div>
-			<?php $this->load->view('admin/_partials/footer.php') ?>
+			<!-- kontener -->
+		</div>
+		<!-- page wrppr -->
+	</div>
+	<!-- terakhir main wrapper -->
+
+	<?php $this->load->view('admin/_partials/js.php'); ?>
+
+	<!-- datatable -->
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('#table').DataTable()
+		});
+
+	</script>
+	<!-- akhirnyaa -->
+
+	<!-- modal edit -->
+	<?php foreach($jenis_pekerjaan->result() as $jp): ?>
+	<div class="row">
+		<div id="modal-edit<?=$jp->id_jenis;?>" class="modal fade">
+			<div class="modal-dialog">
+				<form action="<?php echo base_url('admin/subunit/edit'); ?>" method="post">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+						</div>
+						<div class="modal-body">
+							<h4 class="modal-title">Edit Jenis Pekerjaan</h4>
+							<br />
+							<input type="hidden" readonly value="<?=$jp->id_jenis?>" name="id_jenis"
+								class="form-control">
+
+							<div class="form-group">
+								<label class='col-md-3'>Jenis Pekerjaan</label>
+								<div class='col-md-9'><input type="text" name="sub_unit" autocomplete="off"
+										value="<?=$jp->sub_unit?>" required placeholder="Masukkan Sub Unit"
+										class="form-control"></div>
+							</div>
+							<br>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-warning"><i class="icon-pencil5"></i> Edit</button>
+						</div>
+					</div>
+				</form>
+			</div>
 		</div>
 	</div>
-	<?php $this->load->view('admin/_partials/js.php'); ?>
+	<?php endforeach; ?>
+	<!-- end edit -->
 </body>
 
 </html>

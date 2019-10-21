@@ -11,55 +11,57 @@ class Subunit extends MY_Controller
         $this->cekLogin();
         if ($this->session->userdata('type') == "member") {
         redirect('member/member');
-        }
-        $Sub_model = $this->load->model('adminModel/Sub_model');
+    }
+        $this->load->model('adminModel/Sub_model');
         $this->load->library('form_validation');
     }
 
     public function index()
     {
-        $data["jenis_pekerjaan"] = $this->Sub_model->getAll();
-        $this->load->view("admin/sub_unit/index", $data);
+        $data['jenis_pekerjaan'] = $this->Sub_model->all();
+        $this->load->view("admin/sub_unit/index",$data);
     }
-
-    public function add()
-    {
-        $jenis_pekerjaan = $this->Sub_model;
-        $validation = $this->form_validation;
-        $validation->set_rules($jenis_pekerjaan->rules());
-
-        if ($validation->run()) {
-            $jenis_pekerjaan->save();
-            $this->session->set_flashdata('success', 'Berhasil disimpan');
+    public function tambah(){
+        $this->form_validation->set_rules('sub_unit', 'sub_unit', 'required');
+        if($this->form_validation->run()==FALSE){
+            $this->session->set_flashdata('error',"Data Gagal Di Tambahkan");
+            redirect('admin/subunit');
+        }else{
+            $data=array(
+                "sub_unit"=>$_POST['sub_unit'],
+            );
+            $this->db->insert('jenis_pekerjaan',$data);
+            $this->session->set_flashdata('sukses',"Data Berhasil Disimpan");
+            redirect('admin/subunit');
         }
-
-        redirect(site_url('admin/sub_unit'));
     }
-
-    public function edit($id = null)
+    public function edit()
     {
-        if (!isset($id)) redirect('admin/sub_unit');
-        $jenis_pekerjaan = $this->Sub_model;
-        $validation = $this->form_validation;
-        $validation->set_rules($jenis_pekerjaan->rules());
-
-        if ($validation->run()) {
-            $jenis_perkerjaan->update();
-            $this->session->set_flashdata('success', 'Berhasil disimpan');
+        $this->form_validation->set_rules('id_jenis', 'id_jenis', 'required');
+        $this->form_validation->set_rules('sub_unit', 'sub_unit', 'required');
+        if($this->form_validation->run()==FALSE){
+            $this->session->set_flashdata('error',"Data Gagal Di Edit");
+            redirect('admin/subunit');
+        }else{
+            $data=array(
+                "sub_unit"=>$_POST['sub_unit'],
+            );
+            $this->db->where('id_jenis', $_POST['id_jenis']);
+            $this->db->update('jenis_pekerjaan',$data);
+            $this->session->set_flashdata('sukses',"Data Berhasil Diedit");
+            redirect('admin/subunit');
         }
-
-        $data["jenis_pekerjaan"] = $jenis_pekerjaan->getById($id);
-        if (!$data["jenis_pekerjaan"]) show_404();
-        
-        $this->load->view("admin/sub_unit/edit_form", $data);
     }
-
-    public function delete($id=null)
+    public function hapus($id)
     {
-        if (!isset($id)) show_404();
-        
-        if ($this->Sub_model->delete($id)) {
-            redirect(site_url('admin/sub_unit'));
+        if($id==""){
+            $this->session->set_flashdata('error',"Data Anda Gagal Di Hapus");
+            redirect('admin/subunit');
+        }else{
+            $this->db->where('id_jenis', $id);
+            $this->db->delete('jenis_pekerjaan');
+            $this->session->set_flashdata('sukses',"Data Berhasil Dihapus");
+            redirect('admin/subunit');
         }
     }
 }

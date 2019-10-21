@@ -3,29 +3,43 @@
 
 <head>
 	<?php $this->load->view('admin/_partials/head.php') ?>
+	<style>
+		#tengah-gan {
+			position: relative;
+			height: 204px;
+			margin: 6rem auto 8.1rem auto;
+			width: 100%;
+		}
+
+	</style>
 	<title>Dashboard Admin</title>
 </head>
 
 <body>
 	<?php $this->load->view('admin/_partials/preload.php') ?>
 	<div id="main-wrapper">
-	<?php $this->load->view('admin/_partials/nav.php') ?>
-	<?php $this->load->view('admin/_partials/sidebar.php') ?>
+		<?php $this->load->view('admin/_partials/nav.php') ?>
+		<?php $this->load->view('admin/_partials/sidebar.php') ?>
 		<div class="page-wrapper">
 			<div class="container-fluid">
-				<center>
-					<h2>SELAMAT DATANG ANDA TELAH BERHASIL LOGIN SEBAGAI Admin</h2>
-					<h3> Username Anda Adalah <?php echo $this->session->userdata('username'); ?></h3><br /><br />
-					<!-- <a href="< ?= base_url('admin/subunit/index');?>">Jenis pekerjaan</a> -->
-					<br />
-					<br />
-					<!-- <a href="< ?php echo site_url('authentication/auth/logout'); ?>">Keluar</a> -->
-				</center>
+				<div class="card mb-auto">
+					<div class="card-body">
+						<div id="tengah-gan" class="text-center">
+							<h2 class="card-title">SELAMAT DATANG</h2>
+							<div>
+								<h2 class="card-subtitle">anda berhasil login sebagai <h2 class="font-italic">Admin</h2></h2>
+							</div>
+							<br>
+							<h6 class="card-text">Username Anda Adalah <?php echo $this->session->userdata('username'); ?></h6 class="card-text">
+							<br /><br />
+						</div>
+					</div>
+				</div>
 			</div>
 			<?php $this->load->view('admin/_partials/footer.php');?>
+			<?php $this->load->view('admin/_partials/js.php'); ?>
 		</div>
 	</div>
-	<?php $this->load->view('admin/_partials/js.php'); ?>
 </body>
 
 </html>

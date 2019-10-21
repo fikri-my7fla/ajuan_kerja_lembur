@@ -79,7 +79,7 @@
     }
     update();
 
-        console.log("document ready");
+        // a// a//  console.log("document ready");
         var offset = 0;
         plot1();
 

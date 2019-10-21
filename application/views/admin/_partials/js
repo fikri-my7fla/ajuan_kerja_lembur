@@ -1,0 +1,10 @@
+<script src="<?= base_url('assets/library/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js'); ?>"></script>
+<script src="<?= base_url('assets/library/extra-libs/sparkline/sparkline.js'); ?>"></script>
+
+<script src="< ?= base_url('assets/library/libs/flot/excanvas.js'); ?>"></script>
+<script src="< ?= base_url('assets/library/libs/flot/jquery.flot.js'); ?>"></script>
+<script src="< ?= base_url('assets/library/libs/flot/jquery.flot.time.js'); ?>"></script>
+<script src="< ?= base_url('assets/library/libs/flot/jquery.flot.stack.js'); ?>"></script>
+<script src="< ?= base_url('assets/library/libs/flot/jquery.flot.crosshair.js'); ?>"></script>
+<script src="< ?= base_url('assets/library/libs/flot.tooltip/js/jquery.flot.tooltip.min.js'); ?>"></script>
+<script src="< ?= base_url('assets/js/pages/chart/chart-page-init.js'); ?>"></script>

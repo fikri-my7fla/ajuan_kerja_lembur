@@ -14,4 +14,9 @@ class MY_Controller extends CI_Controller{
         redirect('authentication/auth/login');
         }
     }
+    public function subUnits(){
+        if (!$this->session->userdata('username')) {
+        redirect('admin/subunit/');
+        }
+    }
 }
