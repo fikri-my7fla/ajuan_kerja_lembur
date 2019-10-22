@@ -4,12 +4,14 @@
 	<title>Dashboard</title>
 </head>
 
-<body>
-	<center>
-		<h2>SELAMAT DATANG ANDA TELAH BERHASIL LOGIN SEBAGAI MEMBER</h2>
-		<h3> Username Anda Adalah <?php echo $this->session->userdata('username'); ?></h3><br /><br />
-		<a href="<?php echo site_url('authentication/auth/logout'); ?>">Keluar</a>
-	</center>
-</body>
 
-</html>
+</div>
+<!-- /.container-fluid -->
+<div class="container-fluid mt-5">
+	<center>
+		<h2>SELAMAT DATANG DI APLIKASI AJUAN KERJA LEMBUR</h2>
+		<h3>ANDA TELAH BERHASIL LOGIN SEBAGAI MEMBER</h3>
+		<h4> Username Anda Adalah <?php echo $this->session->userdata('username'); ?></h4><br /><br />
+	</center>
+</div>
+<!-- End of Main Content -->

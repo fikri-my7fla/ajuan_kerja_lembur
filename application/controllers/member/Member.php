@@ -13,6 +13,11 @@ class Member extends MY_Controller{
     }
     
     public function index(){
+        $data['title'] = 'Beranda';
+        $this->load->view('member/_partials/head', $data);
+        $this->load->view('member/_partials/side');
+        $this->load->view('member/_partials/top');
         $this->load->view('member/dashboard');
+        $this->load->view('member/_partials/foot');
     }
 }
