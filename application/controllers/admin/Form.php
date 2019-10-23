@@ -13,31 +13,12 @@ class Form extends MY_Controller{
         elseif ($this->session->userdata('type') == "operator"){
             redirect('pimpinan/op');
         }
+    $this->load->model('adminModel/Form_model','form_model');
     $this->load->library('form_validation');
     }
-    public function index(){
-        $this->load->view('admin/form/index');
-    }
-    public function tambah(){
-        $this->load->model('adminModel/Form_model');
-        $data['pal'] = $this->Form_model->unit();
-        $this->load->view('admin/form/tambah',$data);
-    }
-    public function aksiTambah(){
-        $this->form_validation->set_rules('tanggal', 'tanggal', 'required');
-        $this->form_validation->set_rules('unit_kerja', 'unit_kerja', 'required');
-        $this->form_validation->set_rules('jenis_id', 'jenis_id', 'required');
-        $this->form_validation->set_rules('hasil', 'hasil', 'required');
-        $this->form_validation->set_rules('alasan', 'alasan', 'required');
-
-        if($this->form_validation->run()==FALSE){
-            $this->session->set_flashdata('error',"Data Gagal Di Tambahkan");
-            redirect('admin/form');
-        }else{
-            $this->load->model('adminModel/Form_model');
-            $data = $this->Form_model->actionTambah();
-            $this->session->set_flashdata('sukses',"Data Berhasil Disimpan");
-            redirect('admin/form');
-        }
+    function index(){
+        $data['pegawai'] = $this->form_model->get_pegawai();
+        $data['form_ajuan'] = $this->form_model->get_form_ajuan();
+        $this->load->view('admin/form/index',$data);
     }
 }

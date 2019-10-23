@@ -7,7 +7,7 @@ class Form_model extends CI_Model{
         parent::__construct();
         $this->load->database();
     }
-    public function index(){
-        
+    public function getData(){
+        $this->db->select('');
     }
 }

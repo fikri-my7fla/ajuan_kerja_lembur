@@ -24,7 +24,7 @@
 							Width</span></a></li> -->
 				<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
 						href="<?= base_url('admin/form/index'); ?>" aria-expanded="false"><i class="mdi mdi-receipt"></i><span
-							class="hide-menu">Forms Ajuan </span></a>
+							class="hide-menu">Ajuan Lembur</span></a>
 				</li>
 				<!-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
 						href="pages-buttons.html" aria-expanded="false"><i class="mdi mdi-relative-scale"></i><span
