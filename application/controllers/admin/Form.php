@@ -9,8 +9,11 @@ class Form extends MY_Controller{
         $this->cekLogin();
         if ($this->session->userdata('type') == "member") {
         redirect('member/member');
-        $this->load->library('form_validation');
         }
+        elseif ($this->session->userdata('type') == "operator"){
+            redirect('pimpinan/op');
+        }
+    $this->load->library('form_validation');
     }
     public function index(){
         $this->load->view('admin/form/index');

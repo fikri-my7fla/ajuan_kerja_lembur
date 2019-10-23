@@ -10,6 +10,9 @@ class Member extends MY_Controller{
         if ($this->session->userdata('type') == "admin") {
         redirect('admin/admin');
         }
+        elseif ($this->session->userdata('type') == "operator"){
+            redirect('pimpinan/op');
+        }
     }
     
     public function index(){

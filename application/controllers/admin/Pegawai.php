@@ -9,6 +9,9 @@ class Pegawai extends MY_Controller {
         if ($this->session->userdata('type') == "member") {
         redirect('member/member');
         }
+        elseif ($this->session->userdata('type') == "operator"){
+            redirect('pimpinan/op');
+        }
         $this->load->model('adminModel/Pegawai_model');
         $this->load->library('form_validation');
     }

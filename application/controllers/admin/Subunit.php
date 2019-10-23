@@ -11,7 +11,9 @@ class Subunit extends MY_Controller
         $this->cekLogin();
         if ($this->session->userdata('type') == "member") {
         redirect('member/member');
-    }
+        }elseif ($this->session->userdata('type') == "operator"){
+            redirect('pimpinan/op');
+        }
         $this->load->model('adminModel/Sub_model');
         $this->load->library('form_validation');
     }
