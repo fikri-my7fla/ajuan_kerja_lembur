@@ -14,6 +14,8 @@ var site_url = "< ?= site_url(); ?>";
 <script type="text/javascript" src="<?= base_url('assets/datatables/js/jquery.dataTables.min.js'); ?>"></script>
 <!-- <script src="< ?= base_url('assets/js/customtable.js');?>" type="text/javascript"> -->
 
+<script src="<?= base_url('assets/bs-select/bootstrap-select.js'); ?>"></script>
+
 <script src="<?= base_url('assets/js/waves.js'); ?>"></script>
 
 <script src="<?= base_url('assets/js/sidebarmenu.js'); ?>"></script>

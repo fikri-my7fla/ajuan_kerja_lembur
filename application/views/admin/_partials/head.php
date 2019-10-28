@@ -12,10 +12,11 @@
     <link rel="stylesheet" href="<?= base_url('assets/datatables/css/dataTables.bootstrap4.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('assets/bootstrap/css/bootstrap.min.css')?>">
     <link rel="stylesheet" href="<?= base_url('assets/package/dist/sweetalert2.min.css'); ?>" />
-    <link rel="text/css" href="<?= base_url('assets/css/icons/font-awesome/css/fontawesome.all.css')?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/icons/font-awesome/fontawesome.min.css')?>">
     <link href="<?= base_url('assets/js/jquery-steps/jquery.steps.css') ?>" rel="stylesheet">
     <link href="<?= base_url('assets/js/jquery-steps/steps.css') ?>" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url('assets/package/dist/sweetalert2.min.css'); ?>" />
     <!-- <link rel="stylesheet" href="< ?= base_url('assets/css/icons/material-design-iconic-font/css/material-design-iconic-font.min.css')?>"> -->
     <link rel="stylesheet" href="<?= base_url('assets/css/style.min.css')?>">
+    <link rel="stylesheet" href="<?= base_url('assets/bs-select/bootstrap-select.css')?>">
 </head>

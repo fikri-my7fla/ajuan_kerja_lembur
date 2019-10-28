@@ -32,30 +32,24 @@
 							<table class="table table-hover" id="pgwTable">
 								<thead>
 									<tr>
-										<th>NO</th>
 										<th>NIP</th>
 										<th>Nama Pegawai</th>
 										<th>Sub Unit</th>
-										<th style="width: 5%">Edit</th>
-										<th style="width: 5%">hapus</th>
+										<th class="text-center">action</th>
 									</tr>
 								</thead>
 								<tbody>
 									<?php if($pgw->num_rows() > 0): ?>
-									<?php $index = 1; ?>
 									<?php foreach($pgw->result() as $key): ?>
 									<tr>
-										<td><?= $index++; ?></td>
 										<td><?= $key->nip; ?></td>
 										<td><?= $key->nama_pegawai; ?></td>
 										<td><?= $key->sub_unit; ?></td>
-										<td>
+										<td class="text-center">
 											<a data-toggle="modal" data-target="#modal-edit2<?=$key->id_data_pegawai;?>"
 												class="btn btn-warning btn-circle" data-popup="tooltip"
 												data-placement="top" title="Edit Data"><i
 													class="fa fa-pencil-alt"></i></a>
-										</td>
-										<td>
 											<a href="<?= site_url(''); ?>admin/pegawai/hapusaksi/<?= $key->id_data_pegawai; ?>"
 												class="btn btn-danger btn-circle" title="Hapus Data"
 												onclick="return confirm('yakin?');"><i class="fas fa-trash"></i></a>
