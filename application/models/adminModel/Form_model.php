@@ -40,7 +40,7 @@ class Form_model extends CI_Model {
         $this->db->select('
             form_ajuan_lembur.*,
             COUNT(pegawai_id) AS item_pegawai,
-            jenis_pekerjaan.sub_unit
+			jenis_pekerjaan.sub_unit,
         ');
 		$this->db->from('form_ajuan_lembur');
         $this->db->join('jenis_pekerjaan', 'jenis_id=id_jenis');
@@ -49,7 +49,7 @@ class Form_model extends CI_Model {
 		$this->db->group_by('id_form_ajuan');
 		$query = $this->db->get();
 		return $query;
-    }
+	}
     function create_form($tanggal,$unit_kerja,$jenis_id,$hasil,$alasan,$pegawai){
 		$this->db->trans_start();
 			//INSERT TO
@@ -59,7 +59,7 @@ class Form_model extends CI_Model {
                 'jenis_id' => $jenis_id,
                 'hasil' => $hasil,
                 'alasan' => $alasan,
-                'status' => '1',
+                'status' => '0',
 			);
 			$this->db->insert('form_ajuan_lembur', $data);
 			//GET ID

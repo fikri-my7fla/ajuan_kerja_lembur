@@ -39,7 +39,7 @@ class Auth extends CI_Controller{
         //melakukan pengalihan halaman sesuai dengan typenya
         if ($this->session->userdata('type') == "admin"){redirect('admin/admin');}
         if ($this->session->userdata('type') == "member"){redirect('member/member');}
-        if ($this->session->userdata('type') == "operator"){redirect('pimpinan/op');}
+        if ($this->session->userdata('type') == "operator"){redirect('pimpinan/dashboard');}
 
         //proses login dan validasi nya
         if ($this->input->post('submit')) {
@@ -55,7 +55,7 @@ class Auth extends CI_Controller{
                 redirect('admin/admin');
                 }
                 elseif ($data->type == 'operator') {
-                redirect('pimpinan/op');
+                redirect('pimpinan/dashboard');
                 }
                 else if($data->type == 'member'){
                 redirect('member/member');

@@ -11,7 +11,7 @@ class Form extends MY_Controller{
         redirect('member/member');
         }
         elseif ($this->session->userdata('type') == "operator"){
-            redirect('pimpinan/op');
+            redirect('pimpinan/dashboard');
         }
     $this->load->model('adminModel/Form_model','form_model');
     $this->load->library('form_validation');
@@ -27,6 +27,9 @@ class Form extends MY_Controller{
         $data['pegawai'] = $this->form_model->get_pegawai();
         $data['form_ajuan'] = $this->form_model->get_form_ajuan();
         $this->load->view('admin/form/create',$data);
+    }
+    function detail(){
+        $this->load->view('admin/form/detail');
     }
     //CREATE
 	function create(){
@@ -68,5 +71,5 @@ class Form extends MY_Controller{
         $this->form_model->delete_form($id_form_ajuan);
         $this->session->set_flashdata('sukses',"Data Berhasil Dihapus");
 		redirect('admin/form');
-	}
+    }
 }

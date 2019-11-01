@@ -65,12 +65,14 @@
 											<td><?php echo $row->sub_unit;?></td>
 											<td><?php echo $row->hasil;?></td>
 											<td><?php echo $row->item_pegawai.' Pegawai';?></td>
-											<td class="text-center"><?php if ($row->status == 1){
-													echo '<h4><span class="badge badge-warning font-medium text-dark"><i class="mdi mdi-sync"></i> Diproses</span></h4>';
-												} elseif ($row->status == 2){
-													echo '<h4><span class="badge badge-success font-medium text-light"><i class="mdi mdi-check"></i> Diterima</span></h4>';
-												} elseif ($row->status == 3){
-													echo '<h4><span class="badge badge-danger font-medium text-light"><i class="mdi mdi-alert-outline"></i> Ditolak</span></h4>';
+											<td><?php if ($row->status == 0){
+												echo '<h4><span class="badge badge-secondary col-12 font-medium text-light"><i class="mdi mdi-file-document"></i> Proses</span></h4>';
+											} elseif ($row->status == 1){
+												echo '<h4><span class="badge badge-success col-12 font-medium text-light"><i class="mdi mdi-check"></i> Diterima</span></h4>';
+											} elseif ($row->status == 2){
+												echo '<h4><span class="badge badge-danger col-12 font-medium text-light"><i class="mdi mdi-alert-outline"></i> Ditolak</span></h4>';
+											} elseif ($row->status == 3){
+												echo '<h4><span class="badge badge-info col-12 font-medium text-light"><i class="mdi mdi-sync"></i> Direvisi</span></h4>';
 												}?>
 											</td>
 											<td class="text-right">
@@ -90,6 +92,11 @@
 													data-id_form_ajuan="<?php echo $row->id_form_ajuan;?>">
 													<span class="fa fa-trash"></span>
 													Hapus</a>
+												<!-- detail -->
+												<a href="<?= base_url('admin/form/detail') ?>" class="btn btn-primary btn-sm"
+												>
+												Detail
+												</a>
 											</td>
 										</tr>
 										<?php endforeach;?>

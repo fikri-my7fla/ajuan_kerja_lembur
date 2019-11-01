@@ -59,7 +59,7 @@
                                 <br>
 								<div class="form-group">
 									<label for="">Pegawai yang akan Lembur #</label>
-									<select id="bs-select" class="strings" name="pegawai[]" data-width="100%"
+									<select class="strings" name="pegawai[]" data-width="100%"
 										data-live-search="true" multiple required>
 										<?php foreach ($pegawai->result() as $row) :?>
 										<option data-subtext="<?= $row->sub_unit ?>"
@@ -81,8 +81,8 @@
 	<?php $this->load->view('admin/_partials/js.php'); ?>
 	<script>        
         $(document).ready(function (){
-            $('#bs-select').selectpicker();
-        })
+            $('.strings').selectpicker();
+		});
 
 	</script>
 </body>

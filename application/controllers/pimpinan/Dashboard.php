@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Op extends MY_Controller{
+class Dashboard extends MY_Controller{
 
     public function __construct()
     {
@@ -15,6 +15,6 @@ class Op extends MY_Controller{
         }
     }
     public function index(){
-        $this->load->view('oprt/form/index');
+        $this->load->view('oprt/index');
     }
 }

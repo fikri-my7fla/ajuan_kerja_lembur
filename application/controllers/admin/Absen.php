@@ -11,12 +11,12 @@ class Absen extends MY_Controller{
         redirect('member/member');
         }
         elseif ($this->session->userdata('type') == "operator"){
-            redirect('pimpinan/op');
+            redirect('pimpinan/dashboard');
         }
         $this->load->model('adminModel/Absen_model','absen_model');
     }
     function index(){
-        $data['absen'] = $this->absen_model->get_absen();
+        $data['absen'] = $this->absen_model->absen();
         $this->load->view('admin/absen/index',$data);
     }
 }
