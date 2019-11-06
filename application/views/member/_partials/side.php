@@ -2,11 +2,11 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
 <!-- Sidebar - Brand -->
-<a class="sidebar-brand d-flex align-items-center justify-content-center my-1" href="#">
+<a class="sidebar-brand d-flex align-items-center justify-content-center my-1">
   <div class="sidebar-brand-icon rotate-n-15">
-    <i class="fas fa-laugh-wink"></i>
+    <i class="fas fa-laugh-wink text-light"></i>
   </div>
-  <div class="sidebar-brand-text mx-3">Aplikasi Ajuan Kerja Lembur</div>
+  <div class="sidebar-brand-text text-light mx-2"><i>Aplikasi Ajuan Kerja Lembur</i></div>
 </a>
 
 <!-- Divider -->
@@ -40,22 +40,22 @@
 
 <!-- Heading -->
 <div class="sidebar-heading">
-  Form
+  Ajuan Lembur
 </div>
 
 <!-- Nav Item - Charts -->
 <li class="nav-item">
-  <a class="nav-link" href="#">
+  <a class="nav-link" href="<?php echo site_url('member/form'); ?>">
     <i class="fas fa-fw fa-chart-area"></i>
-    <span>Form Ajuan Lembur</span></a>
+    <span>Daftar Ajuan Lembur</span></a>
 </li>
 
 <!-- Divider -->
 <hr class="sidebar-divider">
 
 <!-- Nav Item - Charts -->
-<li class="nav-item" data-toggle="modal" data-target="#logoutModal">
-  <a class="nav-link">
+<li class="nav-item">
+  <a class="nav-link tombol-logout" href="<?php echo site_url('authentication/auth/logout'); ?>">
     <i class="fas fa-fw fa-sign-out-alt"></i>
     <span>Logout</span></a>
 </li>

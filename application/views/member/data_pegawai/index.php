@@ -1,9 +1,9 @@
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-<div class="container my-3">
-    <center>
-        <h2>Data Pegawai</h2>
-        <table id="tabelpegawai" >
+<div class="container-fluid">
+<center>
+<div class="table-responsive">
+        <h1 class="mt-3"><b>Data Pegawai</b></h1>
+        <br/>
+        <table class="table table-hover" id="tabelpegawai" >
             <thead>
                 <tr>
                     <th>No</th>
@@ -18,7 +18,7 @@
                 foreach ($unit as $row) { ?>
                 <tr>
                     <td>
-                        <?= $no++;?>
+                        <?= $row->id_data_pegawai;?>
                     </td>
                     <td>
                         <?= $row->nip; ?>
@@ -33,11 +33,6 @@
             <?php } ?>
             </tbody>
         </table>
-    </center>
+    </div>
+</center>
 </div>
-
-<script>
-$(document).ready(function() {
-    $('#tabelpegawai').DataTable();
-} );
-</script>
