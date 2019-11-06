@@ -34,7 +34,7 @@ class Form_model extends CI_Model {
 		$this->db->where('id_form_ajuan',$id_form_ajuan);
 		$query = $this->db->get();
 		return $query;
-    }
+    } 
     //READ
 	function get_form_ajuan(){
         $this->db->select('
@@ -47,6 +47,32 @@ class Form_model extends CI_Model {
 		$this->db->join('ajuan_lembur', 'id_form_ajuan=form_id');
         $this->db->join('data_pegawai', 'pegawai_id=id_data_pegawai');
 		$this->db->group_by('id_form_ajuan');
+		$query = $this->db->get();
+		return $query;
+	}
+	function get_form_detail($id_form_ajuan){
+        $this->db->select('
+			form_ajuan_lembur.*,
+			COUNT(pegawai_id) AS item_pegawai,
+			jenis_pekerjaan.sub_unit,
+        ');
+		$this->db->from('form_ajuan_lembur');
+        $this->db->join('jenis_pekerjaan', 'jenis_id=id_jenis');
+		$this->db->join('ajuan_lembur', 'id_form_ajuan=form_id');
+		$this->db->join('data_pegawai','pegawai_id=id_data_pegawai');
+		$this->db->where('id_form_ajuan', $id_form_ajuan);
+		$query = $this->db->get();
+		return $query;
+	}
+	function get_pgw_detail($id_form_ajuan){
+        $this->db->select('
+			data_pegawai.nama_pegawai
+        ');
+		$this->db->from('form_ajuan_lembur');
+        $this->db->join('jenis_pekerjaan', 'jenis_id=id_jenis');
+		$this->db->join('ajuan_lembur', 'id_form_ajuan=form_id');
+		$this->db->join('data_pegawai','pegawai_id=id_data_pegawai');
+		$this->db->where('id_form_ajuan', $id_form_ajuan);
 		$query = $this->db->get();
 		return $query;
 	}

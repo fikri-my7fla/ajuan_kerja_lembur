@@ -28,8 +28,10 @@ class Form extends MY_Controller{
         $data['form_ajuan'] = $this->form_model->get_form_ajuan();
         $this->load->view('admin/form/create',$data);
     }
-    function detail(){
-        $this->load->view('admin/form/detail');
+    function detail($id_form_ajuan){
+        $data['test'] = $this->form_model->get_form_detail($id_form_ajuan);
+        $data['apa_yah'] = $this->form_model->get_pgw_detail($id_form_ajuan);
+        $this->load->view('admin/form/detail',$data);
     }
     //CREATE
 	function create(){

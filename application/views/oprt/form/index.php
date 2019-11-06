@@ -53,14 +53,15 @@
 											<td><?php echo $row->tanggal;?></td>
 											<td><?php echo $row->sub_unit;?></td>
 											<td><?php echo $row->hasil;?></td>
-											<td><span data-toggle="tooltip" title="<?= $row->nama_pegawai;?>"><?php echo $row->item_pegawai.' Pegawai';?></span></td>
-											<td><?php if ($row->status == 0){
+											<td><?php echo $row->item_pegawai.' Pegawai';?></td>
+											<td><?php 
+											if ($row->status == '1'){
 												echo '<h4><span class="badge badge-secondary col-12 font-medium text-light"><i class="mdi mdi-file-document"></i> Proses</span></h4>';
-											} elseif ($row->status == 1){
+											} elseif ($row->status == '2'){
 												echo '<h4><span class="badge badge-success col-12 font-medium text-light"><i class="mdi mdi-check"></i> Diterima</span></h4>';
-											} elseif ($row->status == 2){
+											} elseif ($row->status == '3'){
 												echo '<h4><span class="badge badge-danger col-12 font-medium text-light"><i class="mdi mdi-alert-outline"></i> Ditolak</span></h4>';
-											} elseif ($row->status == 3){
+											} elseif ($row->status == '4'){
 												echo '<h4><span class="badge badge-info col-12 font-medium text-light"><i class="mdi mdi-sync"></i> Direvisi</span></h4>';
 												}?>
 											</td>
@@ -75,7 +76,7 @@
 													<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 
 														<div class="dropdown-item">
-															<form action="<?= site_url('pimpinan/form/proses1') ?>"
+															<form action="<?= site_url('pimpinan/form/proses2') ?>"
 																method="post">
 																<div>
 																	<input type="hidden" name="id_form_ajuan"
@@ -86,7 +87,7 @@
 															</form>
 														</div>
 														<div class="dropdown-item">
-															<form action="<?= site_url('pimpinan/form/proses2') ?>"
+															<form action="<?= site_url('pimpinan/form/proses3') ?>"
 																method="post">
 																<div>
 																	<input type="hidden" name="id_form_ajuan"
@@ -97,7 +98,7 @@
 															</form>
 														</div>
 														<div class="dropdown-item">
-															<form action="<?= site_url('pimpinan/form/proses3') ?>"
+															<form action="<?= site_url('pimpinan/form/proses4') ?>"
 																method="post">
 																<div>
 																	<input type="hidden" name="id_form_ajuan"
@@ -107,8 +108,11 @@
 																</div>
 															</form>
 														</div>
-
 													</div>
+												<a href="<?= base_url('pimpinan/form/detail/') ?><?php echo $row->id_form_ajuan;?>"
+													class="btn btn-info btn-sm">
+													Detail
+												</a>
 												</div>
 											</td>
 										</tr>
@@ -131,7 +135,7 @@
 		$(document).ready(function () {
 			$('#formAjuan').DataTable();
 
-			
+
 		});
 
 	</script>

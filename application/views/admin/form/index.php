@@ -65,13 +65,13 @@
 											<td><?php echo $row->sub_unit;?></td>
 											<td><?php echo $row->hasil;?></td>
 											<td><?php echo $row->item_pegawai.' Pegawai';?></td>
-											<td><?php if ($row->status == 0){
+											<td><?php if ($row->status == '1'){
 												echo '<h4><span class="badge badge-secondary col-12 font-medium text-light"><i class="mdi mdi-file-document"></i> Proses</span></h4>';
-											} elseif ($row->status == 1){
+											} elseif ($row->status == '2'){
 												echo '<h4><span class="badge badge-success col-12 font-medium text-light"><i class="mdi mdi-check"></i> Diterima</span></h4>';
-											} elseif ($row->status == 2){
+											} elseif ($row->status == '3'){
 												echo '<h4><span class="badge badge-danger col-12 font-medium text-light"><i class="mdi mdi-alert-outline"></i> Ditolak</span></h4>';
-											} elseif ($row->status == 3){
+											} elseif ($row->status == '4'){
 												echo '<h4><span class="badge badge-info col-12 font-medium text-light"><i class="mdi mdi-sync"></i> Direvisi</span></h4>';
 												}?>
 											</td>
@@ -93,9 +93,9 @@
 													<span class="fa fa-trash"></span>
 													Hapus</a>
 												<!-- detail -->
-												<a href="<?= base_url('admin/form/detail') ?>" class="btn btn-primary btn-sm"
-												>
-												Detail
+												<a href="<?= base_url('admin/form/detail/') ?><?= $row->id_form_ajuan;?>"
+													class="btn btn-info btn-sm">
+													Detail
 												</a>
 											</td>
 										</tr>
@@ -161,10 +161,10 @@
 							</div>
 							<div class="form-group col-md-6">
 								<label for="">Pegawai #</label>
-								<select class="bs-select strings" name="pegawai_edit[]" data-width="100%"
+								<select class="bs-select strings" data-size="5" name="pegawai_edit[]" data-width="100%"
 									data-live-search="true" multiple required>
 									<?php foreach ($pegawai->result() as $row) :?>
-									<option value="<?php echo $row->id_data_pegawai;?>"><?php echo $row->nama_pegawai;?>
+									<option data-subtext="<?= $row->sub_unit ?>" value="<?php echo $row->id_data_pegawai;?>"><?php echo $row->nama_pegawai;?>
 									</option>
 									<?php endforeach;?>
 								</select>

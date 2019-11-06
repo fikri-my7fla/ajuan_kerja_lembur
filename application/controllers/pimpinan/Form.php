@@ -21,7 +21,29 @@ class Form extends MY_Controller{
         $data['form_ajuan'] = $this->form_model->get_form_ajuan();
         $this->load->view('oprt/form/index',$data);
     }
-    function proses1(){
+    function detail($id_form_ajuan){
+        $data['test'] = $this->form_model->get_form_detail($id_form_ajuan);
+        $data['apa_yah'] = $this->form_model->get_pgw_detail($id_form_ajuan);
+        $this->load->view('oprt/form/detail',$data);
+    }
+    function proses2(){
+        // Proses terima
+        $id=$this->input->post('id_form_ajuan',true);
+        $this->db->set('status','2',false);
+        $this->db->where('id_form_ajuan',$id);
+        $this->db->update('form_ajuan_lembur');
+        // proses absen
+        
+    }
+    function absen($id_ajuan){
+        $data = $this->form_model->get_ajuan($id_ajuan)->result();
+        foreach ($data as $result) {
+            $ajuan_id = $result->id_ajuan;
+        }
+        $this->session->set_flashdata('sukses',"");
+		redirect('pimpinan/form');
+    }
+    function proses3(){
         $id=$this->input->post('id_form_ajuan',true);
         $this->db->set('status','3',false);
         $this->db->where('id_form_ajuan',$id);
@@ -29,17 +51,9 @@ class Form extends MY_Controller{
         $this->session->set_flashdata('sukses',"");
 		redirect('pimpinan/form');
     }
-    function proses2(){
+    function proses4(){
         $id=$this->input->post('id_form_ajuan',true);
-        $this->db->set('status','2',false);
-        $this->db->where('id_form_ajuan',$id);
-        $this->db->update('form_ajuan_lembur');
-        $this->session->set_flashdata('sukses',"");
-		redirect('pimpinan/form');
-    }
-    function proses3(){
-        $id=$this->input->post('id_form_ajuan',true);
-        $this->db->set('status','1',false);
+        $this->db->set('status','4',false);
         $this->db->where('id_form_ajuan',$id);
         $this->db->update('form_ajuan_lembur');
         $this->session->set_flashdata('sukses',"");

@@ -115,7 +115,7 @@
 									data-error="Please enter your unit work." required>
 									<option value="<?= $key->jenis_id?>"><?= $key->sub_unit ?></option>
 									<?php foreach($get_data_sub as $conn):?>
-									<option value="<?= $conn->sub_unit?>"><?= $conn->sub_unit ?></option>
+									<option value="<?= $conn->id_jenis?>"><?= $conn->sub_unit ?></option>
 									<?php endforeach;?>
 
 								</select>

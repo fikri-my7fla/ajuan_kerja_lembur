@@ -18,4 +18,5 @@
     <link rel="stylesheet" href="<?= base_url('assets/package/dist/sweetalert2.min.css'); ?>" />
     <!-- <link rel="stylesheet" href="< ?= base_url('assets/css/icons/material-design-iconic-font/css/material-design-iconic-font.min.css')?>"> -->
     <link rel="stylesheet" href="<?= base_url('assets/css/style.min.css')?>">
+    
 </head>
