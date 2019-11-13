@@ -15,8 +15,12 @@ class Form extends MY_Controller{
         }
     $this->load->model('adminModel/Form_model','form_model');
     $this->load->library('form_validation');
+    $this->load->library('breadcrumbs');
     }
     function index(){
+        $this->breadcrumbs->push('Home','admin/');
+        $this->breadcrumbs->push('Ajuan','admin/form');
+        $data['brcm'] = $this->breadcrumbs->show();
         $data['subunit'] = $this->form_model->get_data_sub();
         $data['pegawai'] = $this->form_model->get_pegawai();
         $data['form_ajuan'] = $this->form_model->get_form_ajuan();
@@ -29,8 +33,14 @@ class Form extends MY_Controller{
         $this->load->view('admin/form/create',$data);
     }
     function detail($id_form_ajuan){
+        $this->breadcrumbs->push('Home','admin/');
+        $this->breadcrumbs->push('Ajuan','admin/form');
+        $this->breadcrumbs->push('Detail Data','admin/form/detail');
+        $data['brcm'] = $this->breadcrumbs->show();
         $data['test'] = $this->form_model->get_form_detail($id_form_ajuan);
         $data['apa_yah'] = $this->form_model->get_pgw_detail($id_form_ajuan);
+        $data['sign1'] = $this->form_model->show_sign1_data($id_form_ajuan);
+        $data['sign2'] = $this->form_model->show_sign2_data($id_form_ajuan);
         $this->load->view('admin/form/detail',$data);
     }
     //CREATE

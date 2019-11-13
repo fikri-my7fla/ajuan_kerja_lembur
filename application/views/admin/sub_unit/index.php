@@ -13,6 +13,16 @@
 		<?php $this->load->view('admin/_partials/sidebar.php') ?>
 		<div class="page-wrapper">
 			<div class="container-fluid">
+			<div class="">
+					<div class="row">
+						<div class="col-12 d-flex no-block align-items-center">
+							<h3 class="page-title">Jenis Pekerjaan</h3>
+							<div class="ml-auto text-right">
+								<?php echo $brcm;; ?>
+							</div>
+						</div>
+					</div>
+				</div>
 				<?php $data=$this->session->flashdata('sukses'); if($data!=""){ ?>
 				<div id="notifikasi" class="alert alert-success"><strong>Sukses! </strong> <?=$data;?><button
 						type="button" class="close" data-dismiss="alert" aria-label="Close">

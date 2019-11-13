@@ -66,16 +66,36 @@ class Form_model extends CI_Model {
 	}
 	function get_pgw_detail($id_form_ajuan){
         $this->db->select('
-			data_pegawai.nama_pegawai
+			data_pegawai.nama_pegawai,
+			jenis_pekerjaan.sub_unit
         ');
 		$this->db->from('form_ajuan_lembur');
-        $this->db->join('jenis_pekerjaan', 'jenis_id=id_jenis');
-		$this->db->join('ajuan_lembur', 'id_form_ajuan=form_id');
-		$this->db->join('data_pegawai','pegawai_id=id_data_pegawai');
+		$this->db->join('ajuan_lembur', 'form_ajuan_lembur.id_form_ajuan=ajuan_lembur.form_id');
+		$this->db->join('data_pegawai','ajuan_lembur.pegawai_id=data_pegawai.id_data_pegawai');
+        $this->db->join('jenis_pekerjaan', 'data_pegawai.jenis_id=jenis_pekerjaan.id_jenis');
 		$this->db->where('id_form_ajuan', $id_form_ajuan);
 		$query = $this->db->get();
 		return $query;
 	}
+	function show_sign1_data($id_form_ajuan){
+        $this->db->select('signature.*');
+        $this->db->from('signature');
+        $this->db->join('form_ajuan_lembur','id_form_ajuan=form_id');
+        $this->db->where('form_id',$id_form_ajuan);
+        $this->db->where('append','sign1');
+        $query = $this->db->get();
+        return $query;
+    }
+    // tanda tangan 2
+    function show_sign2_data($id_form_ajuan){
+        $this->db->select('signature.*');
+        $this->db->from('signature');
+        $this->db->join('form_ajuan_lembur','id_form_ajuan=form_id');
+        $this->db->where('form_id',$id_form_ajuan);
+        $this->db->where('append','sign2');
+        $query = $this->db->get();
+        return $query;
+    }
     function create_form($tanggal,$unit_kerja,$jenis_id,$hasil,$alasan,$pegawai){
 		$this->db->trans_start();
 			//INSERT TO

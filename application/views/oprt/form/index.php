@@ -13,6 +13,16 @@
 		<?php $this->load->view('oprt/_partials/sidebar.php') ?>
 		<div class="page-wrapper">
 			<div class="container-fluid">
+				<div class="">
+					<div class="row">
+						<div class="col-12 d-flex no-block align-items-center">
+							<h3 class="page-title">Ajuan Lembur</h3>
+							<div class="ml-auto text-right">
+								<?php echo $brcm; ?>
+							</div>
+						</div>
+					</div>
+				</div>
 				<?php $data=$this->session->flashdata('sukses'); if($data!=""){ ?>
 				<div id="notifikasi" class="alert alert-success"><strong>Sukses! </strong> <?=$data;?><button
 						type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -66,53 +76,11 @@
 												}?>
 											</td>
 											<td>
-												<div class="dropleft">
-													<a class="btn btn-secondary btn-sm dropdown-toggle" href="#"
-														role="button" id="dropdownMenuLink" data-toggle="dropdown"
-														aria-haspopup="true" aria-expanded="false">
-														Proses
+												<div class="text-center">
+													<a href="<?= base_url('pimpinan/form/detail/') ?><?php echo $row->id_form_ajuan;?>"
+														class="btn btn-info btn-sm">Detail <span
+															class="fa fa-book"></span>
 													</a>
-
-													<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-
-														<div class="dropdown-item">
-															<form action="<?= site_url('pimpinan/form/proses2') ?>"
-																method="post">
-																<div>
-																	<input type="hidden" name="id_form_ajuan"
-																		value="<?= $row->id_form_ajuan;?>">
-																	<button class="btn btn-success btn-sm col"
-																		type="submit">Diterima</button>
-																</div>
-															</form>
-														</div>
-														<div class="dropdown-item">
-															<form action="<?= site_url('pimpinan/form/proses3') ?>"
-																method="post">
-																<div>
-																	<input type="hidden" name="id_form_ajuan"
-																		value="<?= $row->id_form_ajuan;?>">
-																	<button class="btn btn-danger btn-sm col"
-																		type="submit">Ditolak</button>
-																</div>
-															</form>
-														</div>
-														<div class="dropdown-item">
-															<form action="<?= site_url('pimpinan/form/proses4') ?>"
-																method="post">
-																<div>
-																	<input type="hidden" name="id_form_ajuan"
-																		value="<?= $row->id_form_ajuan;?>">
-																	<button class="btn btn-info btn-sm col"
-																		type="submit">Direvisi</button>
-																</div>
-															</form>
-														</div>
-													</div>
-												<a href="<?= base_url('pimpinan/form/detail/') ?><?php echo $row->id_form_ajuan;?>"
-													class="btn btn-info btn-sm">
-													Detail
-												</a>
 												</div>
 											</td>
 										</tr>

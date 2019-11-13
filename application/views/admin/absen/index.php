@@ -13,11 +13,20 @@
 		<?php $this->load->view('admin/_partials/sidebar.php') ?>
 		<div class="page-wrapper">
 			<div class="container-fluid">
+			<div class="">
+					<div class="row">
+						<div class="col-12 d-flex no-block align-items-center">
+							<h3 class="page-title">Absen Lembur</h3>
+							<div class="ml-auto text-right">
+								<?php echo $brcm; ?>
+							</div>
+						</div>
+					</div>
+				</div>
 				<div class="card">
 					<div class="card-body">
 						<div class="container">
 							<div class="table-responsive">
-								<h1 class="card-title mb-3">Absen Lembur</h1>
 								<table class="table table-hover">
 									<thead>
 										<tr>

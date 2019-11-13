@@ -16,10 +16,14 @@ class Subunit extends MY_Controller
         }
         $this->load->model('adminModel/Sub_model');
         $this->load->library('form_validation');
+        $this->load->library('breadcrumbs');
     }
 
     public function index()
     {
+        $this->breadcrumbs->push('Home','admin/');
+        $this->breadcrumbs->push('Jenis Pekerjaan','admin/subunit');
+		$data['brcm'] = $this->breadcrumbs->show();
         $data['jenis_pekerjaan'] = $this->Sub_model->all();
         $this->load->view("admin/sub_unit/index",$data);
     }

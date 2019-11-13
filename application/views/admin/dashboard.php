@@ -16,21 +16,34 @@
 </head>
 
 <body>
-	<?php $this->load->view('admin/_partials/preload.php') ?>
+	<!-- < ?php $this->load->view('admin/_partials/preload.php') ?> -->
 	<div id="main-wrapper">
 		<?php $this->load->view('admin/_partials/nav.php') ?>
 		<?php $this->load->view('admin/_partials/sidebar.php') ?>
 		<div class="page-wrapper">
 			<div class="container-fluid">
+				<div class="">
+					<div class="row">
+						<div class="col-12 d-flex no-block align-items-center">
+							<h3 class="page-title">Dashboard</h3>
+							<div class="ml-auto text-right">
+								<?php echo $test; ?>
+							</div>
+						</div>
+					</div>
+				</div>
+
 				<div class="card mb-auto">
 					<div class="card-body">
 						<div id="tengah-gan" class="text-center">
 							<h2 class="card-title">SELAMAT DATANG</h2>
 							<div>
-								<h2 class="card-subtitle">anda berhasil login sebagai <h2 class="font-italic">Admin</h2></h2>
+								<h2 class="card-subtitle">anda berhasil login sebagai <h2 class="font-italic">Admin</h2>
+								</h2>
 							</div>
 							<br>
-							<h6 class="card-text">Username Anda Adalah <?php echo $this->session->userdata('username'); ?></h6 class="card-text">
+							<h6 class="card-text">Username Anda Adalah
+								<?php echo $this->session->userdata('username'); ?></h6 class="card-text">
 							<br /><br />
 						</div>
 					</div>

@@ -13,8 +13,11 @@ class Dashboard extends MY_Controller{
         elseif ($this->session->userdata('type') == "member"){
             redirect('member/member');
         }
+        $this->load->library('breadcrumbs');
     }
     public function index(){
-        $this->load->view('oprt/index');
+        $this->breadcrumbs->push('Home','/');
+        $data['brcm'] = $this->breadcrumbs->show();
+        $this->load->view('oprt/index',$data);
     }
 }

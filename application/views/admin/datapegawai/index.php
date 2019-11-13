@@ -13,21 +13,37 @@
 		<?php $this->load->view('admin/_partials/sidebar.php') ?>
 		<div class="page-wrapper">
 			<div class="container-fluid">
+
+				<div class="">
+					<div class="row">
+						<div class="col-12 d-flex no-block align-items-center">
+							<h3 class="page-title">Data Pegawai</h3>
+							<div class="ml-auto text-right">
+								<?php echo $test1; ?>
+							</div>
+						</div>
+					</div>
+				</div>
+
 				<?php $data=$this->session->flashdata('sukses'); if($data!=""){ ?>
 				<div id="notifikasi" class="alert alert-success"><strong>Sukses! </strong> <?=$data;?><button
 						type="button" class="close" data-dismiss="alert" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
-					</button></div>
+					</button>
+				</div>
 				<?php } ?>
 				<div class="card mb-3">
-					<br>
-					<br>
-					<h2 class="card-title text-center">Data Pegawai</h2>
-					<div>
-						<a href="<?= base_url('admin/pegawai/tambah')?>" class="btn btn-success" title="Tambah Data"><span
-						class="mdi mdi-account-plus"></span> Tambah</a>
-					</div>
+
 					<div class="card-body">
+						<div class="row mb-3">
+							<div class="col-12 d-flex no-block align-items-center">
+								<h2 class="card-title"></h2>
+								<div class="ml-auto text-right">
+									<a href="<?= base_url('admin/pegawai/tambah')?>" class="btn btn-success"
+										title="Tambah Data"><span class="mdi mdi-account-plus"></span> Tambah</a>
+								</div>
+							</div>
+						</div>
 						<div class="table-responsive">
 							<table class="table table-hover" id="pgwTable">
 								<thead>
@@ -64,13 +80,18 @@
 								</tbody>
 							</table>
 						</div>
+						<!-- table resposive -->
 					</div>
+					<!-- end card body -->
 				</div>
+				<!-- end card -->
 			</div>
+			<!-- container fluid -->
 			<?php $this->load->view('admin/_partials/footer.php') ?>
 		</div>
+		<!-- page wrappr -->
 	</div>
-	</div>
+	<!-- id= wrapper -->
 
 	<?php $this->load->view('admin/_partials/js.php'); ?>
 	<script>

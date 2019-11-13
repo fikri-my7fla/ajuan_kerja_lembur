@@ -14,8 +14,12 @@ class Absen extends MY_Controller{
             redirect('pimpinan/dashboard');
         }
         $this->load->model('adminModel/Absen_model','absen_model');
+        $this->load->library('breadcrumbs');
     }
     function index(){
+        $this->breadcrumbs->push('Home','admin/');
+        $this->breadcrumbs->push('Absen Lembur','admin/absen');
+        $data['brcm'] = $this->breadcrumbs->show();
         $data['absen'] = $this->absen_model->absen();
         $this->load->view('admin/absen/index',$data);
     }

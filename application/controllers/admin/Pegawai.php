@@ -14,14 +14,22 @@ class Pegawai extends MY_Controller {
         }
         $this->load->model('adminModel/Pegawai_model');
         $this->load->library('form_validation');
+        $this->load->library('breadcrumbs');
     }
     public function index(){
+        $this->breadcrumbs->push('Home','admin/');
+        $this->breadcrumbs->push('Pegawai','admin/pegawai');
+		$data['test1'] = $this->breadcrumbs->show();
         $data['pgw'] = $this->Pegawai_model->getData();
         $data['get_data_sub'] = $this->Pegawai_model->getSub();
         $this->load->view("admin/datapegawai/index",$data);
     }
     public function tambah(){
-        $data = array('get_sub_unit'=>$this->Pegawai_model->getSub());
+        $this->breadcrumbs->push('Home','admin/');
+        $this->breadcrumbs->push('Pegawai','admin/pegawai');
+        $this->breadcrumbs->push('Tambah Pegawai','/pegawai/tambah');
+        $data['tambah'] = $this->breadcrumbs->show();
+        $data['get_sub_unit'] = $this->Pegawai_model->getSub();
         $this->load->view("admin/datapegawai/tambah",$data);
     }
     public function tambahAksi(){
