@@ -14,6 +14,15 @@
   $(window).resize(function() {
     if ($(window).width() < 768) {
       $('.sidebar .collapse').collapse('hide');
+      $("body").toggleClass("sidebar-toggled");
+      $(".sidebar").toggleClass("toggled");
+    };
+  });
+  $(window).on('load', function() {
+    if ($(window).width() < 768) {
+      $('.sidebar .collapse').collapse('hide');
+      $("body").toggleClass("sidebar-toggled");
+      $(".sidebar").toggleClass("toggled");
     };
   });
 
@@ -40,6 +49,8 @@
   // Smooth scrolling using jQuery easing
   $(document).on('click', 'a.scroll-to-top', function(e) {
     var $anchor = $(this);
+    $("body").toggleClass("sidebar-toggled");
+    $(".sidebar").toggleClass("toggled");
     $('html, body').stop().animate({
       scrollTop: ($($anchor.attr('href')).offset().top)
     }, 1000, 'easeInOutExpo');
