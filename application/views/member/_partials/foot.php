@@ -1,116 +1,62 @@
 <!-- Footer -->
-<!-- End of Footer -->
+<div class="navbar navbar-expand-lg navbar-light">
+				<div class="text-center d-lg-none w-100">
+					<button type="button" class="navbar-toggler dropdown-toggle" data-toggle="collapse" data-target="#navbar-footer">
+						<i class="icon-unfold mr-2"></i>
+						Footer
+					</button>
+				</div>
 
-</div>
-<!-- End of Content Wrapper -->
-    <footer class="sticky-footer">
-            <div class="container my-auto">
-              <div class="copyright text-center my-auto">
-                <span>Copyright &copy; Your Website <?= date('Y'); ?></span>
-              </div>
-            </div>
-          </footer>
+				<div class="navbar-collapse collapse" id="navbar-footer">
+					<span class="navbar-text mx-auto">
+						&copy; 2015 - 2018. <a href="#">Limitless Web App Kit</a> by <a href="http://themeforest.net/user/Kopyov" target="_blank">Eugene Kopyov</a>
+					</span>
+				</div>
+			</div>
+			<!-- /footer -->
 
-  </div>
-  <!-- End of Page Wrapper -->
+		</div>
+		<!-- /main content -->
 
-  <!-- Scroll to Top Button-->
-  <a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-  </a>
+	</div>
+  <!-- /page content -->
 
-  <!-- Modal Edit Di Halaman Daftar Ajuan -->
-<form action="<?= site_url('member/form/update'); ?>" method="POST">
-    <div class="modal zoomIn animated" id="updateModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-
-        <!-- Modal Header -->
-        <div class="modal-header">
-            <h4 class="modal-title">Edit Ajuan Lembur</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-
-        <!-- Modal body -->
-        <div class="modal-body">
-        <label><b>Pegawai:</b></label>
-          <select name="pegawai_edit[]" class="bootstrap-select strings form-control" data-live-search="true" 
-          multiple required>
-              <?php foreach($pegawai as $pgw) : ?>
-                  <option value="<?= $pgw->id_data_pegawai?>"><?= $pgw->nama_pegawai; ?></option>
-              <?php endforeach; ?>
-          </select>
-        </div>
-
-        <!-- Modal footer -->
-        <div class="modal-footer">
-            <input type="hidden" name="edit_id" id="edit_id" required>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Close 
-            <i class="fas fa-times-circle"></i></button>
-            <button type="submit" class="btn btn-success">Update <i class="fas fa-fw fa-check-circle"></i></button>
-        </div>
-
-        </div>
-    </div>
-    </div>
-</form>
-
-  <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" 
-  aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title text-capitalize" id="exampleModalLabel">
-            <b><?= $this->session->userdata('username'); ?>,</b> Yakin ingin keluar?</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">Jika anda keluar, maka anda harus login kembali nanti</div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">
-          Cancel <i class="fas fa-times-circle"></i></button>
-          <a class="btn btn-dark" href="<?php echo site_url('authentication/auth/logout'); ?>">
-          Logout <i class="fas fa-fw fa-sign-out-alt"></i></a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-
-  <!-- Bootstrap core JavaScript-->
-  <script src="<?= base_url()?>assets/jquery/jquery-3.4.1.js"></script>
-
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-
+  <script src="<?= base_url('assets/jquery/jquery-3.4.1.js');?>"></script>
+  <script src="<?= base_url('assets/members/'); ?>vendor/jquery/jquery.min.js"></script>
   <script src="<?= base_url('assets/members/'); ?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Core plugin JavaScript-->
+  
   <script src="<?= base_url('assets/members/'); ?>vendor/jquery-easing/jquery.easing.min.js"></script>
+  
+  <script src="<?= base_url('assets/members/'); ?>swal2/sweetalert2.all.min.js"></script>
 
-  <!-- Custom scripts for all pages-->
-  <script src="<?= base_url('assets/members/'); ?>js/sb-admin-2.min.js"></script>
 
-  <!-- Page level plugins -->
-  <script src="<?= base_url('assets/members/'); ?>vendor/chart.js/Chart.min.js"></script>
+  <!-- Core JS files -->
 
-  <!-- Page level custom scripts -->
-  <!-- <script src="< ?= base_url('assets/members/'); ?>js/demo/chart-area-demo.js"></script>
-  <script src="< ?= base_url('assets/members/'); ?>js/demo/chart-pie-demo.js"></script> -->
+  <!-- /core JS files -->
 
+	<!-- Theme JS files -->
+
+	<script src="<?= base_url('assets/members/source/'); ?>assets/js/app.js"></script>
+  
+  <script src="<?= base_url('assets/members/'); ?>global_assets/js/plugins/forms/selects/bootstrap_multiselect.js"></script>
+  
+  <script src="<?= base_url('assets/members/'); ?>global_assets/js/demo_pages/form_multiselect.js"></script>
+
+
+  <script src="<?= base_url('assets/members/'); ?>global_assets/js/plugins/forms/selects/select2.min.js"></script>
+
+  <script src="<?= base_url('assets/members/'); ?>global_assets/js/plugins/forms/styling/uniform.min.js"></script>
+  <!-- /theme JS files -->
+  
   <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-  <script src="<?= base_url('assets/members/'); ?>js/bootstrap-select.js"></script>
-  <script src="<?= base_url('assets/members/'); ?>js/sweetalert2.all.min.js"></script>
-  <script src="<?= base_url('assets/members/'); ?>js/myscript.js"></script>
+  <script src="https://cdn.datatables.net/rowreorder/1.2.6/js/dataTables.rowReorder.min.js"></script>
+  <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+  <script src="<?= base_url('assets/members/') ?>js/dataTables.bootstrap4.min.js"></script>
 
-  <script src="<?= base_url('assets/members/'); ?>js/numeric-1.2.6.min.js"></script> 
-		<script src="<?= base_url('assets/members/'); ?>js/bezier.js"></script>
-		<script src="<?= base_url('assets/members/'); ?>js/jquery.signaturepad.js"></script> 
-		
-		<script type='text/javascript' src="https://github.com/niklasvh/html2canvas/releases/download/0.4.1/html2canvas.js"></script>
-		<script src="<?= base_url('assets/members/'); ?>js/json2.min.js"></script>
+  <script src="<?= base_url('assets/members/') ?>js/datatables-demo.js"></script>
+  
+  <script src="<?= base_url('assets/members/'); ?>js/bootstrap-select.js"></script>
+  <script src="<?= base_url('assets/members/'); ?>js/myscript.js"></script>
   
   <!-- UNTUK MENAMPILKAN PRELOADER -->
   <script>
@@ -124,53 +70,32 @@
     })(jQuery);
   </script>
 
-  <!-- UNTUK MEMANGGIL DATATABLE -->
-  <script type="text/javascript">
-  $(document).ready(function() {
-      $('#tabelpegawai').DataTable();
-      $('.form').DataTable();
+  <!-- Untuk Membuat Tooltip -->
+  <script>
+  $(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
   });
   </script>
 
-  <!-- UBAH DATA AJUAN DI HALAMAN DAFTAR AJUAN -->
-  <script type="text/javascript">
-  $(document).ready(function() {
-    $('.bootstrap-select').selectpicker();
-
-    $('.update-record').on('click', function(){
-      var id_form_ajuan = $(this).data('id_form_ajuan');
-      $(".strings").val('');
-      $('#updateModal').modal('show');
-      $('[name="edit_id"]').val(id_form_ajuan);
-
-      $.ajax({
-        url: "<?php echo site_url('member/form/getpegawai_by_form'); ?>",
-        method: "POST",
-        data : {id_form_ajuan:id_form_ajuan},
-        cache:false,
-        success : function(data){
-          var item=data;
-          var val1=item.replace("[","");
-          var val2=val1.replace("]","");
-          var values=val2;
-          $.each(values.split(","), function(i, e) {
-            $(".strings option[value='" + e + "']").prop("selected", true).trigger('change');
-            $(".strings").selectpicker('refresh');
-          });
-        }
-      });
-      return false;
-    });
-  });
+  <script>
+    $(document).ready(function() {
+    var table = $('#Table').DataTable( {
+        // rowReorder: {
+        //     selector: 'td:nth-child(2)'
+        // },
+        responsive: true
+    } );
+} );
   </script>
 
-  <!-- UBAH DATA AJUAN DI HALAMAN DETAIL -->
+  <!-- UBAH DATA AJUAN DI HALAMAN DETAIL AJUAN LEMBUR -->
   <script type="text/javascript">
   $(document).ready(function() {
     $('.bootstrap-select').selectpicker();
 
     $('.ubah-record').on('click', function(){
       var id_form_ajuan = $(this).data('id_form_ajuan');
+      var tanggal = $(this).data('tanggal');
       $(".strings").val('');
       $('#ubahModal').modal('show');
       $('[name="edit_id"]').val(id_form_ajuan);
@@ -196,31 +121,5 @@
   });
   </script>
 
-<script>
-  $(document).ready(function() {
-    $('#signArea').signaturePad({drawOnly:true, drawBezierCurves:true, lineTop:90}).jSignature({'UndoButton':true});
-  });
-  
-  $("#btnSaveSign").click(function(e){
-    html2canvas([document.getElementById('sign-pad')], {
-      onrendered: function (canvas) {
-        var canvas_img_data = canvas.toDataURL('image/png');
-        var img_data = canvas_img_data.replace(/^data:image\/(png|jpg);base64,/, "");
-        //ajax call to save image inside folder
-        $.ajax({
-          url: 'save_sign.php',
-          data: { img_data:img_data },
-          type: 'post',
-          dataType: 'json',
-          success: function (response) {
-              window.location.reload();
-          }
-        });
-      }
-    });
-  });
-</script> 
-
 </body>
-
 </html>

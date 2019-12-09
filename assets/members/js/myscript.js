@@ -5,11 +5,11 @@ if (flashData) {
     Swal.fire({
         title: 'Berhasil!',
         text: 'Data ajuan lembur berhasil ' + flashData,
-        type: 'success'
+        icon: 'success'
     });
 }
 
-//Logout
+//SweetAlert Logout
 $('.tombol-logout').on('click', function(e) {
 
     e.preventDefault();
@@ -18,20 +18,22 @@ $('.tombol-logout').on('click', function(e) {
     Swal.fire({
         title: 'Apakah anda yakin?',
         text: "Anda harus login kembali nanti!",
-        type: 'warning',
-        animation: 'zoomIn animated',
+        icon: '',
+        position: 'center',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         confirmButtonText: 'Logout!',
-        cancelButtonText: 'Batal!'
+        cancelButtonText: 'Batal!',
+        focusConfirm: false,
+        focusCancel: true,
       }).then((result) => {
         if (result.value) {
             
             Swal.fire({
                 title: 'Berhasil Logout! ',
                 text: 'Silahkan login kembali...',
-                type: 'success',
+                icon: 'success',
                 showConfirmButton: false,
                 timer: 5000
             });
@@ -43,11 +45,40 @@ $('.tombol-logout').on('click', function(e) {
             Swal.fire({
               title: 'Dibatalkan...',
               text: 'Anda tidak akan logout :)',
-              type: 'error',
+              icon: 'error',
               showConfirmButton: false,
               timer:2000
-            })
+            });
           }
-      })
+      });
 
+});
+
+//----------------------------------------
+// Breadcrumbs
+//----------------------------------------
+
+
+$('.breadcrumbs li a').each(function(){
+
+    var breadWidth = $(this).width();
+
+    if($(this).parent('li').hasClass('active') || $(this).parent('li').hasClass('first')){
+
+    
+
+    } else {
+
+        $(this).css('width', 70 + 'px');
+
+        $(this).mouseover(function(){
+            $(this).css('width', 97 + 'px');
+        });
+
+        $(this).mouseout(function(){
+            $(this).css('width', 70 + 'px');
+        });
+    }
+
+        
 });

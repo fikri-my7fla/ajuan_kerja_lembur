@@ -12,7 +12,7 @@ class Pegawai extends MY_Controller
         redirect('admin/admin');
         }
         elseif ($this->session->userdata('type') == "operator"){
-            redirect('pimpinan/op');
+            redirect('pimpinan/dashboard');
         }
         $this->load->model('membersModel/pegawai_model', '', TRUE);
         $this->load->helper(array('form', 'url'));
@@ -22,11 +22,12 @@ class Pegawai extends MY_Controller
     public function index()
     {
         $data['title'] = 'Data Pegawai';
-        $data['unit'] = $this->pegawai_model->getAll();
+        $data['page']  = 'data_pegawai';
+        $data['unit']  = $this->pegawai_model->getAll();
 
         $this->load->view('member/_partials/head', $data);
-        $this->load->view('member/_partials/side', $data);
         $this->load->view('member/_partials/top', $data);
+        $this->load->view('member/_partials/side', $data);
         $this->load->view('member/_partials/preloader', $data);
         $this->load->view("member/data_pegawai/index", $data);
         $this->load->view('member/_partials/foot');

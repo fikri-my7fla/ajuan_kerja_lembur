@@ -3,7 +3,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class pegawai_model extends CI_Model
 {
-    public $_table = "data_pegawai";
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->database();
+    }
 
     //AMBIL SEMUA DATA PEGAWAI
     public function getAll()

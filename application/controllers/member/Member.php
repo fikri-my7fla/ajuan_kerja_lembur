@@ -11,19 +11,19 @@ class Member extends MY_Controller{
         redirect('admin/admin');
         }
         elseif ($this->session->userdata('type') == "operator"){
-            redirect('pimpinan/op');
+            redirect('pimpinan/dashboard');
         }
     }
     
-    //TAMPILAN SELAMAT DATANG MEMBER
+    //TAMPILAN BERANDA
     public function index()
     {
         $data['title'] = 'Beranda';
 
         $this->load->view('member/_partials/head', $data);
         $this->load->view('member/_partials/preloader', $data);
-        $this->load->view('member/_partials/side');
         $this->load->view('member/_partials/top');
+        $this->load->view('member/_partials/side');
         $this->load->view('member/dashboard');
         $this->load->view('member/_partials/foot');
     }
