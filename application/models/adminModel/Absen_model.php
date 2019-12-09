@@ -6,16 +6,70 @@ class Absen_model extends CI_Model{
         parent::__construct();
         $this->load->database();
     }
-    function absen(){
-        $this->db->select(
-            'absen_lembur.*,
-            ajuan_lembur.*,
-            data_pegawai.*'
-        );
+    function daftar_absen(){
+        $this->db->select('*');
         $this->db->from('absen_lembur');
-        $this->db->join('ajuan_lembur', 'id_ajuan_lembur=ajuan_lembur_id');
-        $this->db->join('data_pegawai', 'pegawai_id=id_data_pegawai');
         $query = $this->db->get();
         return $query;
+    }
+    function absen($id_user){
+        $this->db->select(
+            'absen_lembur.*,
+            data_pegawai.*,
+            jenis_pekerjaan.*,
+            '
+        );
+        $this->db->from('absen_lembur');
+        $this->db->join('data_pegawai', 'nip_absen=nip');
+        $this->db->join('jenis_pekerjaan','id_jenis=jenis_id');
+        $this->db->where('user_id',$id_user);
+        $query = $this->db->get();
+        return $query;
+    }
+    function get_pegawai_user($id_user){
+        $this->db->select('data_pegawai.nip,jenis_pekerjaan.id_jenis');
+        $this->db->from('users');
+        $this->db->join('data_pegawai','id_user=user_id');
+        $this->db->join('jenis_pekerjaan','jenis_id=id_jenis');
+        $this->db->where('user_id',$id_user);
+        $query = $this->db->get();
+        return $query;
+    }
+    function sign($id_user) {
+        $this->db->select('signature.*,data_pegawai.*,absen_lembur.*');
+        $this->db->from('signature_absen');
+        $this->db->join('signature','id_sign=sign_id');
+        $this->db->join('data_pegawai','nip=nip_pgw');
+        $this->db->join('users','id_user=user_id');
+        $this->db->join('absen_lembur','id_absen=absen_id');
+        $this->db->group_by('id_absen');
+        $this->db->where('user_id',$id_user);
+        $query = $this->db->get();
+        return $query;
+    }
+    Public function insert_insert($json,$nip_pgw,$absen_id,$form_honor,$jenis_honor){
+        $this->db->trans_start();
+        // simpan tanda tangan
+            $data=array(
+                'sign'=>$json,
+                'nip_pgw'=>$nip_pgw
+            );
+            $this->db->insert('signature', $data);
+        // tanda tangan untuk absen
+            $id_sign = $this->db->insert_id();
+            $datas=array(
+                'sign_id'=>$id_sign,
+                'absen_id'=>$absen_id
+            );
+            $this->db->insert('signature_absen',$datas);
+        // proses honor lembur
+            $dats=array(
+                'form_id_honor'=>$form_honor,
+                'nip_honor'=>$nip_pgw,
+                'jenis_id_honor'=>$jenis_honor
+            );
+            $this->db->insert('daftar_honor',$dats);
+
+        $this->db->trans_complete();
     }
 }

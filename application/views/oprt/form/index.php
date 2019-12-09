@@ -12,33 +12,29 @@
 		<?php $this->load->view('oprt/_partials/nav.php') ?>
 		<?php $this->load->view('oprt/_partials/sidebar.php') ?>
 		<div class="page-wrapper">
-			<div class="container-fluid">
-				<div class="">
-					<div class="row">
-						<div class="col-12 d-flex no-block align-items-center">
-							<h3 class="page-title">Ajuan Lembur</h3>
-							<div class="ml-auto text-right">
-								<?php echo $brcm; ?>
-							</div>
+			<div class="page-breadcrumb">
+				<div class="row">
+					<div class="col-md-12 d-flex no-block align-items-center float-left">
+						<h3 class="page-title">Ajuan Lembur</h3>
+						<div class="ml-auto text-right">
+							<?php echo $brcm; ?>
 						</div>
 					</div>
 				</div>
-				<?php $data=$this->session->flashdata('sukses'); if($data!=""){ ?>
-				<div id="notifikasi" class="alert alert-success"><strong>Sukses! </strong> <?=$data;?><button
-						type="button" class="close" data-dismiss="alert" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button></div>
-				<?php } ?>
-				<div class="card mb-3">
-
+			</div>
+			<div class="flash_data" data-flashdata="<?= $this->session->flashdata('sukses');?>"></div>
+			<div class="flash_error" data-flasherr="<?= $this->session->flashdata('error');?>"></div>
+			<div class="flash_revs" data-flashrev="<?= $this->session->flashdata('revs');?>"></div>
+				<div class="container-fluid">
+			<div class="card">
 					<div class="card-body">
 						<div class="container">
 
 							<div class="mb-4">
 								<h2 class="card-title">Ajuan Lembur</h2>
 							</div>
-
-							<div class="table-responsive">
+							<!-- proses -->
+							<div class="table-responsive-sm table-responsive-md">
 								<table class="table table-hover" id="formAjuan">
 									<thead>
 										<tr>
@@ -57,7 +53,7 @@
 										$count=0;
 										foreach ($form_ajuan->result() as $row) :
 											$count++;
-										?>
+											?>
 										<tr>
 											<td><?php echo $count;?></td>
 											<td><?php echo $row->tanggal;?></td>
@@ -73,7 +69,7 @@
 												echo '<h4><span class="badge badge-danger col-12 font-medium text-light"><i class="mdi mdi-alert-outline"></i> Ditolak</span></h4>';
 											} elseif ($row->status == '4'){
 												echo '<h4><span class="badge badge-info col-12 font-medium text-light"><i class="mdi mdi-sync"></i> Direvisi</span></h4>';
-												}?>
+											}?>
 											</td>
 											<td>
 												<div class="text-center">
@@ -88,10 +84,8 @@
 									</tbody>
 								</table>
 							</div>
-
 						</div>
 					</div>
-
 				</div>
 			</div>
 			<?php $this->load->view('oprt/_partials/footer.php') ?>

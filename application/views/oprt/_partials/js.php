@@ -13,6 +13,8 @@ var site_url = "< ?= site_url(); ?>";
 </script> -->
 <script type="text/javascript" src="<?= base_url('assets/datatables/js/jquery.dataTables.min.js'); ?>"></script>
 <!-- <script src="< ?= base_url('assets/js/customtable.js');?>" type="text/javascript"> -->
+<script src="<?= base_url('assets/bs-select/bootstrap-select.js'); ?>"></script>
+<script src="<?= base_url('assets/bs-select/image-picker.js'); ?>"></script>
 
 <script src="<?= base_url('assets/js/waves.js'); ?>"></script>
 
@@ -36,3 +38,5 @@ var site_url = "< ?= site_url(); ?>";
 <script src="<?= base_url('assets/library/libs/flot/jquery.flot.crosshair.js'); ?>"></script>
 <script src="<?= base_url('assets/library/libs/flot.tooltip/js/jquery.flot.tooltip.min.js'); ?>"></script>
 <script src="<?= base_url('assets/js/pages/chart/chart-page-init.js'); ?>"></script>
+
+<script src="<?= base_url('assets/js/myjs.js')?>"></script>

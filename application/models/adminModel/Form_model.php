@@ -27,25 +27,33 @@ class Form_model extends CI_Model {
     }
     //ambil pegawai by form_id
 	function get_pegawai_by_form($id_form_ajuan){
-		$this->db->select('*');
+		$this->db->select('data_pegawai.nip');
 		$this->db->from('data_pegawai');
-		$this->db->join('ajuan_lembur', 'pegawai_id=id_data_pegawai');
+		$this->db->join('ajuan_lembur', 'nip_pegawai=nip');
 		$this->db->join('form_ajuan_lembur', 'id_form_ajuan=form_id');
 		$this->db->where('id_form_ajuan',$id_form_ajuan);
 		$query = $this->db->get();
 		return $query;
-    } 
+	}
+	function get_pegawai_user($user_id){
+        $this->db->select('data_pegawai.nama_pegawai');
+        $this->db->from('data_pegawai');
+        $this->db->join('users','id_user=user_id');
+        $this->db->where('user_id',$user_id);
+        $query = $this->db->get();
+        return $query;
+    }
     //READ
 	function get_form_ajuan(){
         $this->db->select('
-            form_ajuan_lembur.*,
-            COUNT(pegawai_id) AS item_pegawai,
+			form_ajuan_lembur.*,
+            COUNT(nip) AS item_pegawai,
 			jenis_pekerjaan.sub_unit,
         ');
 		$this->db->from('form_ajuan_lembur');
-        $this->db->join('jenis_pekerjaan', 'jenis_id=id_jenis');
+		$this->db->join('jenis_pekerjaan', 'jenis_id=id_jenis');
 		$this->db->join('ajuan_lembur', 'id_form_ajuan=form_id');
-        $this->db->join('data_pegawai', 'pegawai_id=id_data_pegawai');
+        $this->db->join('data_pegawai', 'nip_pegawai=nip');
 		$this->db->group_by('id_form_ajuan');
 		$query = $this->db->get();
 		return $query;
@@ -53,13 +61,13 @@ class Form_model extends CI_Model {
 	function get_form_detail($id_form_ajuan){
         $this->db->select('
 			form_ajuan_lembur.*,
-			COUNT(pegawai_id) AS item_pegawai,
+			COUNT(nip) AS item_pegawai,
 			jenis_pekerjaan.sub_unit,
         ');
 		$this->db->from('form_ajuan_lembur');
         $this->db->join('jenis_pekerjaan', 'jenis_id=id_jenis');
 		$this->db->join('ajuan_lembur', 'id_form_ajuan=form_id');
-		$this->db->join('data_pegawai','pegawai_id=id_data_pegawai');
+		$this->db->join('data_pegawai','nip_pegawai=nip');
 		$this->db->where('id_form_ajuan', $id_form_ajuan);
 		$query = $this->db->get();
 		return $query;
@@ -71,32 +79,26 @@ class Form_model extends CI_Model {
         ');
 		$this->db->from('form_ajuan_lembur');
 		$this->db->join('ajuan_lembur', 'form_ajuan_lembur.id_form_ajuan=ajuan_lembur.form_id');
-		$this->db->join('data_pegawai','ajuan_lembur.pegawai_id=data_pegawai.id_data_pegawai');
+		$this->db->join('data_pegawai','ajuan_lembur.nip_pegawai=data_pegawai.nip');
         $this->db->join('jenis_pekerjaan', 'data_pegawai.jenis_id=jenis_pekerjaan.id_jenis');
 		$this->db->where('id_form_ajuan', $id_form_ajuan);
 		$query = $this->db->get();
 		return $query;
 	}
 	function show_sign1_data($id_form_ajuan){
-        $this->db->select('signature.*');
-        $this->db->from('signature');
-        $this->db->join('form_ajuan_lembur','id_form_ajuan=form_id');
-        $this->db->where('form_id',$id_form_ajuan);
-        $this->db->where('append','sign1');
+        $this->db->select('
+            signature.*,
+            data_pegawai.nama_pegawai
+        ');
+		$this->db->from('signature_ppk');
+		$this->db->join('form_ajuan_lembur','id_form_ajuan=form_id');
+		$this->db->join('signature','id_sign=sign_id');
+		$this->db->join('data_pegawai','nip_pgw=nip');
+		$this->db->where('id_form_ajuan',$id_form_ajuan);
         $query = $this->db->get();
-        return $query;
+        return $query; 
     }
-    // tanda tangan 2
-    function show_sign2_data($id_form_ajuan){
-        $this->db->select('signature.*');
-        $this->db->from('signature');
-        $this->db->join('form_ajuan_lembur','id_form_ajuan=form_id');
-        $this->db->where('form_id',$id_form_ajuan);
-        $this->db->where('append','sign2');
-        $query = $this->db->get();
-        return $query;
-    }
-    function create_form($tanggal,$unit_kerja,$jenis_id,$hasil,$alasan,$pegawai){
+    function create_form($tanggal,$unit_kerja,$jenis_id,$hasil,$alasan,$pengusul,$pegawai){
 		$this->db->trans_start();
 			//INSERT TO
 			$data  = array(
@@ -105,7 +107,8 @@ class Form_model extends CI_Model {
                 'jenis_id' => $jenis_id,
                 'hasil' => $hasil,
                 'alasan' => $alasan,
-                'status' => '0',
+				'pengusul' => $pengusul,
+				'status' => '1',
 			);
 			$this->db->insert('form_ajuan_lembur', $data);
 			//GET ID
@@ -114,14 +117,14 @@ class Form_model extends CI_Model {
 				foreach($pegawai AS $key => $val){
 					$result[] = array(
 					'form_id'  => $id_form_ajuan,
-					'pegawai_id'  => $_POST['pegawai'][$key]
+					'nip_pegawai'  => $_POST['pegawai'][$key]
 					);
 				}      
 			//MULTIPLE INSERT TO AJUAN TABLE
 			$this->db->insert_batch('ajuan_lembur', $result);
 		$this->db->trans_complete();
 	}
-	function update_form($id_form_ajuan,$tanggal,$unit_kerja,$jenis_id,$hasil,$alasan,$status,$pegawai){
+	function update_form($id_form_ajuan,$tanggal,$unit_kerja,$jenis_id,$hasil,$alasan,$status,$pengusul,$pegawai){
 		$this->db->trans_start();
 			//UPDATE TO FORM
 			$data  = array(
@@ -130,7 +133,8 @@ class Form_model extends CI_Model {
                 'jenis_id' => $jenis_id,
                 'hasil' => $hasil,
                 'alasan' => $alasan,
-                'status' => $status,
+				'status' => $status,
+				'pengusul'=>$pengusul,
 			);
 			$this->db->where('id_form_ajuan',$id_form_ajuan);
 			$this->db->update('form_ajuan_lembur', $data);
@@ -142,7 +146,7 @@ class Form_model extends CI_Model {
 				foreach($pegawai AS $key => $val){
 					$result[] = array(
 					'form_id'  => $id_form_ajuan,
-					'pegawai_id'  => $_POST['pegawai_edit'][$key]
+					'nip_pegawai'  => $_POST['pegawai_edit'][$key]
 					);
 				}      
 			//MULTIPLE INSERT TO AJUAN TABLE

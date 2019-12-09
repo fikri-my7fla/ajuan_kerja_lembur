@@ -1,7 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-
 class Auth extends CI_Controller{
 
     public function __construct()
@@ -24,10 +23,11 @@ class Auth extends CI_Controller{
         else {
             //membuat session dengan nama userdata
             $userData = array(
+                'id_user' => $query->id_user,
                 'username' => $query->username,
                 'password' => $query->password,
-                'pegawai_id' =>$query->pegawai_id,
                 'type' => $query->type,
+                'nickname' => $query->nickname,
                 'logged_in' => TRUE,
             );
             $this->session->set_userdata($userData);
@@ -40,6 +40,7 @@ class Auth extends CI_Controller{
         if ($this->session->userdata('type') == "admin"){redirect('admin/admin');}
         if ($this->session->userdata('type') == "member"){redirect('member/member');}
         if ($this->session->userdata('type') == "operator"){redirect('pimpinan/dashboard');}
+        if ($this->session->userdata('type') == "pjbt_pk"){redirect('pimpinan/dashboard');}
 
         //proses login dan validasi nya
         if ($this->input->post('submit')) {
@@ -59,6 +60,9 @@ class Auth extends CI_Controller{
                 }
                 else if($data->type == 'member'){
                 redirect('member/member');
+                } 
+                elseif ($data->type == 'pjbt_pk') {
+                redirect('pimpinan/dashboard');
                 }
             }
 

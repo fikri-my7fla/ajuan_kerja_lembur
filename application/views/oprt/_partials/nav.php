@@ -9,10 +9,10 @@
 			<!-- ============================================================== -->
 			<a class="navbar-brand" href="<?= base_url(); ?>">
 				<b class="logo-icon p-l-10">
-					<img src="<?= base_url('assets/img/mtrx/logo-icon.png');?>" alt="homepage" class="light-logo" />
+					<img src="<?= base_url('assets/Logo.png') ?>" width="30" alt="homepage" class="light-logo" />
 				</b>
 				<span class="logo-text">
-					<img src="<?= base_url('assets/img/mtrx/logo-text.png');?>" alt="homepage" class="light-logo" />
+					<h4 class="text-info p-t-10">AJUAN LEMBUR </h4>
 				</span>
 			</a>
 			<!-- ============================================================== -->
@@ -71,7 +71,7 @@
 				<!-- ============================================================== -->
 				<!-- Messages -->
 				<!-- ============================================================== -->
-				
+
 				<!-- <li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle waves-effect waves-dark" href="" id="2" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false"> <i class="font-24 mdi mdi-comment-processing"></i>
@@ -80,8 +80,8 @@
 						<ul class="list-style-none">
 							<li>
 								<div class=""> -->
-									<!-- Message -->
-									<!-- <a href="javascript:void(0)" class="link border-top">
+				<!-- Message -->
+				<!-- <a href="javascript:void(0)" class="link border-top">
 										<div class="d-flex no-block align-items-center p-10">
 											<span class="btn btn-success btn-circle"><i class="ti-calendar"></i></span>
 											<div class="m-l-10">
@@ -90,8 +90,8 @@
 											</div>
 										</div>
 									</a> -->
-									<!-- Message -->
-									<!-- <a href="javascript:void(0)" class="link border-top">
+				<!-- Message -->
+				<!-- <a href="javascript:void(0)" class="link border-top">
 										<div class="d-flex no-block align-items-center p-10">
 											<span class="btn btn-info btn-circle"><i class="ti-settings"></i></span>
 											<div class="m-l-10">
@@ -100,8 +100,8 @@
 											</div>
 										</div>
 									</a> -->
-									<!-- Message -->
-									<!-- <a href="javascript:void(0)" class="link border-top">
+				<!-- Message -->
+				<!-- <a href="javascript:void(0)" class="link border-top">
 										<div class="d-flex no-block align-items-center p-10">
 											<span class="btn btn-primary btn-circle"><i class="ti-user"></i></span>
 											<div class="m-l-10">
@@ -110,8 +110,8 @@
 											</div>
 										</div>
 									</a> -->
-									<!-- Message -->
-									<!-- <a href="javascript:void(0)" class="link border-top">
+				<!-- Message -->
+				<!-- <a href="javascript:void(0)" class="link border-top">
 										<div class="d-flex no-block align-items-center p-10">
 											<span class="btn btn-danger btn-circle"><i class="fa fa-link"></i></span>
 											<div class="m-l-10">
@@ -148,9 +148,12 @@
 						<a class="dropdown-item" href="javascript:void(0)"><i class="ti-settings m-r-5 m-l-5"></i>
 							Account Setting</a> -->
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="<?php echo site_url('authentication/auth/logout'); ?>"><i
-								class="fa fa-power-off m-r-5 m-l-5"></i>
+						<form action="<?= base_url('authentication/auth/logout')?>" method="post" id="logoutform">
+							<input type="hidden" name="form_name" value="logoutform">
+							<a class="logoutform_button dropdown-item text-dark" name="logout" value="Logga ut"
+								id="logout" /><i class="fa fa-power-off m-r-5 m-l-5"></i>
 							Logout</a>
+						</form>
 						<div class="dropdown-divider"></div>
 						<!-- <div class="p-l-30 p-10"><a href="javascript:void(0)"
 								class="btn btn-sm btn-success btn-rounded">View Profile</a></div> -->
@@ -163,9 +166,3 @@
 		</div>
 	</nav>
 </header>
-
-
-
-
-
-

@@ -16,7 +16,7 @@ class Admin extends MY_Controller{
     
     public function index(){
         $this->load->library('Breadcrumbs','breadcrumbs');
-        $this->breadcrumbs->push('Home',base_url());
+        $this->breadcrumbs->push('Welcome','admin/admin');
 		$data['test'] = $this->breadcrumbs->show();
         $this->load->view('admin/dashboard',$data);
     }

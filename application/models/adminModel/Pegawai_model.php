@@ -8,7 +8,6 @@ class Pegawai_model extends CI_Model {
     }
     public function getData(){
         $this->db->select('
-            data_pegawai.id_data_pegawai,
             data_pegawai.nip,
             data_pegawai.nama_pegawai,
             data_pegawai.jenis_id,
@@ -16,7 +15,7 @@ class Pegawai_model extends CI_Model {
         ');
         $this->db->from('data_pegawai');
         $this->db->join('jenis_pekerjaan', 'jenis_pekerjaan.id_jenis = data_pegawai.jenis_id');
-        $this->db->order_by('data_pegawai.id_data_pegawai', 'desc');
+        $this->db->order_by('data_pegawai.nip', 'desc');
 
         return $this->db->get();
     }
@@ -26,21 +25,24 @@ class Pegawai_model extends CI_Model {
         $query = $this->db->get();
         return $query->result();
     }
-    public function actionTambah(){
+    public function actionTambah($nip,$nama_pegawai,$jenis_id){
         $data = array(
-            "nip"=>$_POST['nip'],
-            "nama_pegawai"=>$_POST['nama_pegawai'],
-            "jenis_id"=>$_POST['jenis_id']
+            "nip"=>$nip,
+            "nama_pegawai"=>$nama_pegawai,
+            "jenis_id"=>$jenis_id
         );
         $this->db->insert('data_pegawai',$data);
     }
-    public function actionEdit(){
+    public function actionEdit($nip,$nama_pegawai,$jenis_id,$edit){
         $data = array(
-            "nip"=>$_POST['nip'],
-            "nama_pegawai"=>$_POST['nama_pegawai'],
-            "jenis_id"=>$_POST['jenis_id']
+            "nip"=>$nip,
+            "nama_pegawai"=>$nama_pegawai,
+            "jenis_id"=>$jenis_id
         );
-        $this->db->where('id_data_pegawai',$_POST['id_data_pegawai']);
+        $this->db->where('nip',$edit);
         $this->db->update('data_pegawai',$data);
+    }
+    public function actionDelete($nip){
+        $this->db->delete('data_pegawai', array('nip' => $nip));
     }
 }

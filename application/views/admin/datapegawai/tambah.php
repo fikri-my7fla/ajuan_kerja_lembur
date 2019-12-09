@@ -12,34 +12,29 @@
 		<?php $this->load->view('admin/_partials/nav.php') ?>
 		<?php $this->load->view('admin/_partials/sidebar.php') ?>
 		<div class="page-wrapper">
-			<div class="container-fluid">
 
-				<div class="">
-					<div class="row">
-						<div class="col-12 d-flex no-block align-items-center">
-							<h3 class="page-title">Tambah Data Pegawai</h3>
-							<div class="ml-auto text-right">
-								<?php echo $tambah; ?>
-							</div>
+			<div class="page-breadcrumb">
+				<div class="row">
+					<div class="col-12 d-flex no-block align-items-center">
+						<h3 class="page-title">Tambah</h3>
+						<div class="ml-auto text-right">
+							<?php echo $tambah; ?>
 						</div>
 					</div>
 				</div>
+			</div>
+			<div class="container-fluid">
 
 				<div class="">
-					<div class="card mb-3">
-
+					<div class="card">
 						<div>
-							<div class="card-header">
-								<a class="text-secondary" href="<?= base_url('admin/pegawai') ?>">Back</a>
-							</div>
-
 							<div class="card-body">
-								<h3 class="text-center">Tambah Data</h3>
+								<h3 class="card-title mb-3">Tambah Pegawai</h3>
 								<form action="<?= site_url('admin/pegawai/tambahAksi');?>" method="post">
 									<div class="form-group">
 										<label class="control-label" for="title">NIP :</label>
-										<input type="text" name="nip" placeholder="NIP" class="form-control"
-											data-error="Please enter nip." required />
+										<input type="text" name="nip" min="9" maxlength="9" placeholder="NIP"
+											class="form-control" data-error="Please enter nip." required />
 										<div class="help-block with-errors"></div>
 									</div>
 
@@ -52,9 +47,9 @@
 
 									<div class="form-group">
 										<label class="control-label" for="title">Jenis Pekerjaan:</label>
-										<select name="jenis_id" class="form-control"
-											data-error="Please enter your unit work." required>
-											<option value="">- select -</option>
+										<select name="jenis_id" title="Pilih jenis Pekerjaan"
+											class="form-control tambah_mdl" data-error="Please enter your unit work."
+											data-live-search="true" required>
 											<?php foreach($get_sub_unit as $key):?>
 											<option value="<?= $key->id_jenis?>">
 												<?= $key->sub_unit ?>
@@ -66,6 +61,9 @@
 									</div>
 
 									<div class="form-group">
+										<a class="btn btn-secondary"
+											href="<?= base_url('admin/pegawai/index'); ?>"><span
+												class="fa fa-reply"></span></a>
 										<button type="submit" class="btn crud-submit btn-success">Submit</button>
 									</div>
 
@@ -83,6 +81,12 @@
 	</div>
 
 	<?php $this->load->view('admin/_partials/js.php'); ?>
+	<script>
+		$(document).ready(function () {
+			$('.tambah_mdl').selectpicker()
+		});
+
+	</script>
 </body>
 
 </html>

@@ -7,12 +7,12 @@
 			<!-- ============================================================== -->
 			<!-- Logo -->
 			<!-- ============================================================== -->
-			<a class="navbar-brand" href="<?= base_url(); ?>">
+			<a class="navbar-brand" id="navbar-brand" href="<?= base_url(); ?>">
 				<b class="logo-icon p-l-10">
-					<img src="<?= base_url('assets/img/mtrx/logo-icon.png');?>" alt="homepage" class="light-logo" />
+					<img src="<?= base_url('assets/Logo.png') ?>" width="30" alt="homepage" class="light-logo" />
 				</b>
 				<span class="logo-text">
-					<img src="<?= base_url('assets/img/mtrx/logo-text.png');?>" alt="homepage" class="light-logo" />
+					<h4 class="text-info p-t-10">AJUAN LEMBUR </h4>
 				</span>
 			</a>
 			<!-- ============================================================== -->
@@ -52,84 +52,6 @@
 			<!-- ============================================================== -->
 			<ul class="navbar-nav float-right">
 				<!-- ============================================================== -->
-				<!-- Comment -->
-				<!-- ============================================================== -->
-				<!-- <li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false"> <i class="mdi mdi-bell font-24"></i>
-					</a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="#">Action</a>
-						<a class="dropdown-item" href="#">Another action</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#">Something else here</a>
-					</div>
-				</li> -->
-				<!-- ============================================================== -->
-				<!-- End Comment -->
-				<!-- ============================================================== -->
-				<!-- ============================================================== -->
-				<!-- Messages -->
-				<!-- ============================================================== -->
-				
-				<!-- <li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle waves-effect waves-dark" href="" id="2" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false"> <i class="font-24 mdi mdi-comment-processing"></i>
-					</a>
-					<div class="dropdown-menu dropdown-menu-right mailbox animated bounceInDown" aria-labelledby="2">
-						<ul class="list-style-none">
-							<li>
-								<div class=""> -->
-									<!-- Message -->
-									<!-- <a href="javascript:void(0)" class="link border-top">
-										<div class="d-flex no-block align-items-center p-10">
-											<span class="btn btn-success btn-circle"><i class="ti-calendar"></i></span>
-											<div class="m-l-10">
-												<h5 class="m-b-0">Event today</h5>
-												<span class="mail-desc">Just a reminder that event</span>
-											</div>
-										</div>
-									</a> -->
-									<!-- Message -->
-									<!-- <a href="javascript:void(0)" class="link border-top">
-										<div class="d-flex no-block align-items-center p-10">
-											<span class="btn btn-info btn-circle"><i class="ti-settings"></i></span>
-											<div class="m-l-10">
-												<h5 class="m-b-0">Settings</h5>
-												<span class="mail-desc">You can customize this template</span>
-											</div>
-										</div>
-									</a> -->
-									<!-- Message -->
-									<!-- <a href="javascript:void(0)" class="link border-top">
-										<div class="d-flex no-block align-items-center p-10">
-											<span class="btn btn-primary btn-circle"><i class="ti-user"></i></span>
-											<div class="m-l-10">
-												<h5 class="m-b-0">Pavan kumar</h5>
-												<span class="mail-desc">Just see the my admin!</span>
-											</div>
-										</div>
-									</a> -->
-									<!-- Message -->
-									<!-- <a href="javascript:void(0)" class="link border-top">
-										<div class="d-flex no-block align-items-center p-10">
-											<span class="btn btn-danger btn-circle"><i class="fa fa-link"></i></span>
-											<div class="m-l-10">
-												<h5 class="m-b-0">Luanch Admin</h5>
-												<span class="mail-desc">Just see the my new admin!</span>
-											</div>
-										</div>
-									</a>
-								</div>
-							</li>
-						</ul>
-					</div>
-				</li> -->
-				<!-- ============================================================== -->
-				<!-- End Messages -->
-				<!-- ============================================================== -->
-
-				<!-- ============================================================== -->
 				<!-- User profile and search -->
 				<!-- ============================================================== -->
 				<li class="nav-item dropdown">
@@ -138,22 +60,26 @@
 							src="<?= base_url('assets/img/mtrx/users/1.jpg');?>" alt="user" class="rounded-circle"
 							width="31"></a>
 					<div class="dropdown-menu dropdown-menu-right user-dd animated">
-						<!-- <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i> My
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" data-toggle="modal" data-target="#profilModalCenter"><i
+								class="ti-user m-r-5 m-l-5"></i> My
 							Profile</a>
-						<a class="dropdown-item" href="javascript:void(0)"><i class="ti-wallet m-r-5 m-l-5"></i> My
-							Balance</a>
-						<a class="dropdown-item" href="javascript:void(0)"><i class="ti-email m-r-5 m-l-5"></i>
-							Inbox</a>
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="javascript:void(0)"><i class="ti-settings m-r-5 m-l-5"></i>
-							Account Setting</a> -->
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="<?php echo site_url('authentication/auth/logout'); ?>"><i
-								class="fa fa-power-off m-r-5 m-l-5"></i>
+						<a class="dropdown-item" data-toggle="modal" data-target="#profilEdit" href="#"><i
+								class="ti-settings m-r-5 m-l-5"></i>
+							Account Setting</a>
+						<!-- <div class="dropdown-divider"></div> -->
+						
+						<form action="<?= base_url('authentication/auth/logout')?>" method="post" id="logoutform">
+							<input type="hidden" name="form_name" value="logoutform">
+							<a class="logoutform_button dropdown-item text-dark" name="logout" value="Logga ut"
+								id="logout" /><i class="fa fa-power-off m-r-5 m-l-5"></i>
 							Logout</a>
+						</form>
 						<div class="dropdown-divider"></div>
-						<!-- <div class="p-l-30 p-10"><a href="javascript:void(0)"
-								class="btn btn-sm btn-success btn-rounded">View Profile</a></div> -->
+						<div>
+							<footer class="footer text-right">Project By Me :)</footer>
+						</div>
 					</div>
 				</li>
 				<!-- ============================================================== -->
@@ -162,10 +88,92 @@
 			</ul>
 		</div>
 	</nav>
+
 </header>
+<style>
+	.close {
+		position: absolute;
+		top: 15px;
+		right: 35px;
+		color: #f1f1f1;
+		font-size: 40px;
+		font-weight: bold;
+		transition: 0.3s;
+	}
 
+	.close:hover,
+	.close:focus {
+		color: #bbb;
+		text-decoration: none;
+		cursor: pointer;
+	}
 
+</style>
+<div class="modal fade" id="profilModalCenter" tabindex="-1" role="dialog" aria-labelledby="profilModalCenterTitle"
+	aria-hidden="true">
+	<span class="fa fa-times close" data-dismiss="modal"></span>
+	<div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<img src="<?= base_url('assets/img/mtrx/users/1.jpg');?>" alt="user" class="img-responsive img-fluid"
+				width="">
+			<div class="modal-body">
 
+				<div class="">
+					<h5 class="card-title" id="profilModalLongTitle">Profil Anda #</h5>
+					<div class="clearfix">
+						<div class="float-left">
+							<div>
+								<p class="card-text">
+									<i class="far fa-id-badge mr-1"></i>
+									Yourname
+								</p>
+							</div>
+							<div>
+								<p class="card-text">
+									<i class="far fa-user mr-1"></i>
+									Username
+								</p>
+							</div>
+							<div>
+								<p class="card-text">
+									<i class="fas fa-book mr-1"></i>
+									Login-by
+								</p>
+							</div>
+						</div>
+						<div class="float-right">
+							<div>: <?php echo $this->session->userdata('nickname');?></div>
+							<div>: <?php echo $this->session->userdata('username');?></div>
+							<div>: <?php echo $this->session->userdata('type');?></div>
+						</div>
+					</div>
+				</div>
+				<footer class="blockquote-footer mt-3 text-right">
+					<a class="" data-dismiss="modal"><i class="fa fa-reply"></i></a>
+					<small><cite title="Source Title">Thank's : ) </cite></small>
+				</footer>
+			</div>
+		</div>
+	</div>
+</div>
 
+<div id="profilEdit" class="modal fade" role="dialog">
+	<div class="modal-dialog">
 
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Modal Header</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body">
+				<p>Some text in the modal.</p>
 
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+
+	</div>
+</div>

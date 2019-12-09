@@ -18,5 +18,8 @@
     <link rel="stylesheet" href="<?= base_url('assets/package/dist/sweetalert2.min.css'); ?>" />
     <!-- <link rel="stylesheet" href="< ?= base_url('assets/css/icons/material-design-iconic-font/css/material-design-iconic-font.min.css')?>"> -->
     <link rel="stylesheet" href="<?= base_url('assets/css/style.min.css')?>">
+    <link rel="stylesheet" href="<?= base_url('assets/bs-select/bootstrap-select.css')?>">
+    <link rel="stylesheet" href="<?= base_url('assets/bs-select/image-picker.css')?>">
+	<link rel="stylesheet" href="<?= base_url('assets/css/cstumfikri.css')?>">
     
 </head>

@@ -12,63 +12,49 @@ class Pegawai extends MY_Controller {
         elseif ($this->session->userdata('type') == "operator"){
             redirect('pimpinan/dashboard');
         }
-        $this->load->model('adminModel/Pegawai_model');
+        $this->load->model('adminModel/Pegawai_model','pegawai_model');
         $this->load->library('form_validation');
         $this->load->library('breadcrumbs');
     }
     public function index(){
-        $this->breadcrumbs->push('Home','admin/');
-        $this->breadcrumbs->push('Pegawai','admin/pegawai');
+        $this->breadcrumbs->push('Home','admin/admin');
+        $this->breadcrumbs->push('Pegawai','admin/pegawai/index');
 		$data['test1'] = $this->breadcrumbs->show();
-        $data['pgw'] = $this->Pegawai_model->getData();
-        $data['get_data_sub'] = $this->Pegawai_model->getSub();
+        $data['pgw'] = $this->pegawai_model->getData();
+        $data['get_data_sub'] = $this->pegawai_model->getSub();
         $this->load->view("admin/datapegawai/index",$data);
     }
     public function tambah(){
-        $this->breadcrumbs->push('Home','admin/');
-        $this->breadcrumbs->push('Pegawai','admin/pegawai');
-        $this->breadcrumbs->push('Tambah Pegawai','/pegawai/tambah');
+        $this->breadcrumbs->push('Home','admin/admin');
+        $this->breadcrumbs->push('Pegawai','admin/pegawai/index');
+        $this->breadcrumbs->push('Tambah','admin/pegawai/tambah');
         $data['tambah'] = $this->breadcrumbs->show();
-        $data['get_sub_unit'] = $this->Pegawai_model->getSub();
+        $data['get_sub_unit'] = $this->pegawai_model->getSub();
         $this->load->view("admin/datapegawai/tambah",$data);
     }
     public function tambahAksi(){
-        $this->form_validation->set_rules('nip', 'nip', 'required');
-        $this->form_validation->set_rules('nama_pegawai', 'nama_pegawai', 'required');
-        $this->form_validation->set_rules('jenis_id', 'jenis_id', 'required');
+        $nip = $this->input->post('nip',true);
+        $nama_pegawai = $this->input->post('nama_pegawai',true);
+        $jenis_id = $this->input->post('jenis_id',true);
 
-        if($this->form_validation->run()==FALSE){
-            $this->session->set_flashdata('error',"Data Gagal Di Tambahkan");
-            redirect('admin/pegawai');
-        }else{
-            $data = $this->Pegawai_model->actionTambah();
-            $this->session->set_flashdata('sukses',"Data Berhasil Disimpan");
-            redirect('admin/pegawai');
-        }
+        $this->pegawai_model->actionTambah($nip,$nama_pegawai,$jenis_id);
+        $this->session->set_flashdata('sukses',"Data Berhasil Ditambah");
+        redirect('admin/pegawai/index');
     }
     public function editAksi(){
-        $this->form_validation->set_rules('nip', 'nip', 'required');
-        $this->form_validation->set_rules('nama_pegawai', 'nama_pegawai', 'required');
-        $this->form_validation->set_rules('jenis_id', 'jenis_id', 'required');
+        $nip = $this->input->post('nip',true);
+        $nama_pegawai = $this->input->post('nama_pegawai',true);
+        $jenis_id = $this->input->post('jenis_id',true);
+        $edit = $this->input->post('edit_nip',true);
 
-        if($this->form_validation->run()==FALSE){
-            $this->session->set_flashdata('error',"Data Gagal Di ubah");
-            redirect('admin/pegawai');
-        }else{
-            $data = $this->Pegawai_model->actionEdit();
-            $this->session->set_flashdata('sukses',"Data Berhasil Diupdate");
-            redirect('admin/pegawai');
-        }
+        $this->pegawai_model->actionEdit($nip,$nama_pegawai,$jenis_id,$edit);
+        $this->session->set_flashdata('sukses',"Data Berhasil Diupdate");
+        redirect('admin/pegawai/index');
     }
-    public function hapusAksi($id){
-        if($id==""){
-            $this->session->set_flashdata('error',"Data Anda Gagal Di Hapus");
-            redirect('admin/pegawai');
-        }else{
-            $this->db->where('id_data_pegawai',$id);
-            $this->db->delete('data_pegawai');
-            $this->session->set_flashdata('sukses',"Data Berhasil Dihapus");
-            redirect('admin/pegawai');
-        }
+    public function hapusAksi(){
+        $nip = $this->input->post('nip_delete',true);
+        $this->pegawai_model->actionDelete($nip);
+        $this->session->set_flashdata('sukses',"Data Berhasil Dihapus");
+		redirect('admin/pegawai/index');
     }
 }

@@ -21,8 +21,8 @@ class Subunit extends MY_Controller
 
     public function index()
     {
-        $this->breadcrumbs->push('Home','admin/');
-        $this->breadcrumbs->push('Jenis Pekerjaan','admin/subunit');
+        $this->breadcrumbs->push('Home','admin/admin');
+        $this->breadcrumbs->push('Jenis Pekerjaan','admin/subunit/index');
 		$data['brcm'] = $this->breadcrumbs->show();
         $data['jenis_pekerjaan'] = $this->Sub_model->all();
         $this->load->view("admin/sub_unit/index",$data);
@@ -31,14 +31,14 @@ class Subunit extends MY_Controller
         $this->form_validation->set_rules('sub_unit', 'sub_unit', 'required');
         if($this->form_validation->run()==FALSE){
             $this->session->set_flashdata('error',"Data Gagal Di Tambahkan");
-            redirect('admin/subunit');
+            redirect('admin/subunit/index');
         }else{
             $data=array(
                 "sub_unit"=>$_POST['sub_unit'],
             );
             $this->db->insert('jenis_pekerjaan',$data);
             $this->session->set_flashdata('sukses',"Data Berhasil Disimpan");
-            redirect('admin/subunit');
+            redirect('admin/subunit/index');
         }
     }
     public function edit()
@@ -47,7 +47,7 @@ class Subunit extends MY_Controller
         $this->form_validation->set_rules('sub_unit', 'sub_unit', 'required');
         if($this->form_validation->run()==FALSE){
             $this->session->set_flashdata('error',"Data Gagal Di Edit");
-            redirect('admin/subunit');
+            redirect('admin/subunit/index');
         }else{
             $data=array(
                 "sub_unit"=>$_POST['sub_unit'],
@@ -55,19 +55,14 @@ class Subunit extends MY_Controller
             $this->db->where('id_jenis', $_POST['id_jenis']);
             $this->db->update('jenis_pekerjaan',$data);
             $this->session->set_flashdata('sukses',"Data Berhasil Diedit");
-            redirect('admin/subunit');
+            redirect('admin/subunit/index');
         }
     }
-    public function hapus($id)
+    public function hapus()
     {
-        if($id==""){
-            $this->session->set_flashdata('error',"Data Anda Gagal Di Hapus");
-            redirect('admin/subunit');
-        }else{
-            $this->db->where('id_jenis', $id);
-            $this->db->delete('jenis_pekerjaan');
-            $this->session->set_flashdata('sukses',"Data Berhasil Dihapus");
-            redirect('admin/subunit');
-        }
+        $id = $this->input->post('delete_id',TRUE);
+        $this->db->delete('jenis_pekerjaan', array('id_jenis' => $id));
+        $this->session->set_flashdata('sukses',"Data Berhasil Dihapus");
+		redirect('admin/subunit/index');
     }
 }

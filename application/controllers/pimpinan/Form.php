@@ -26,6 +26,7 @@ class Form extends MY_Controller{
     }
     // detail ajuan
     function detail($id_form_ajuan){
+        $user_id = $this->session->userData('id_user');
         $this->breadcrumbs->push('Home', 'pimpinan/');
         $this->breadcrumbs->push('Ajuan Lembur', 'pimpinan/form/');
         $this->breadcrumbs->push('Detail','pimpinan/form/detail');
@@ -33,49 +34,49 @@ class Form extends MY_Controller{
         $data['test'] = $this->form_model->get_form_detail($id_form_ajuan);
         $data['apa_yah'] = $this->form_model->get_pgw_detail($id_form_ajuan);
         $data['ajuan'] = $this->form_model->get_ajuan_dtl($id_form_ajuan);
+        $data['signature'] = $this->form_model->show_signature($user_id);
         $data['sign1'] = $this->form_model->show_sign1_data($id_form_ajuan);
-        $data['sign2'] = $this->form_model->show_sign2_data($id_form_ajuan);
+        $data['cape'] = $this->form_model->get_pegawai_user($user_id);
         $this->load->view('oprt/form/detail',$data);
+    }
+    function sign_proses($id_form_ajuan){
+        $user_id = $this->session->userData('id_user');
+        $this->breadcrumbs->push('Home', 'pimpinan/index');
+        $this->breadcrumbs->push('Ajuan', 'pimpinan/form/index');
+        $this->breadcrumbs->push('proses','pimpinan/form/sign_proses');
+        $data['brcm'] = $this->breadcrumbs->show();
+        $data['cape'] = $this->form_model->get_pegawai_user($user_id);
+        $this->load->view('oprt/form/proses_signature',$data);
     }
     // Proses terima
     function proses2(){
-        $id_ajuan = $this->input->post('ajuan_id', TRUE);
-        $this->form_model->proses_absen($id_ajuan);
-        $this->session->set_flashdata('sukses',"");
-        redirect('pimpinan/form');
+        $sign = $this->input->post('sign_id',TRUE);
+        $form = $this->input->post('form_id',TRUE);
+        $id = $this->input->post('stts_id',TRUE);
+        $nip_pgwii = $this->input->post('nip_pgwii',TRUE);
+        $this->form_model->proses_absen($sign,$form,$id,$nip_pgwii);
+        redirect('pimpinan/form/index');
     }
     // ctllr ditolak
     function proses3(){
-        $id=$this->input->post('id_form_ajuan',true);
-        $this->db->set('status','3',false);
+        $id=$this->input->post('stts_tlk',true);
+        $descr=$this->input->post('descr_tlk',TRUE);
+        $this->db->set('status','3');
+        $this->db->set('description',$descr);
         $this->db->where('id_form_ajuan',$id);
         $this->db->update('form_ajuan_lembur');
-        $this->session->set_flashdata('sukses',"");
-		redirect('pimpinan/form');
+        $this->session->set_flashdata('error',"Data Ajuan Lembur Ini Ditolak");
+		redirect('pimpinan/form/index');
     }
     // cntlr direvisi
     function proses4(){
-        $id=$this->input->post('id_form_ajuan',true);
-        $this->db->set('status','4',false);
+        $id=$this->input->post('stts_rev',true);
+        $descr=$this->input->post('descr_rev',TRUE);
+        $this->db->set('status','4');
+        $this->db->set('description',$descr);
         $this->db->where('id_form_ajuan',$id);
         $this->db->update('form_ajuan_lembur');
-        $this->session->set_flashdata('sukses',"");
-		redirect('pimpinan/form');
-    }
-    
-    // controller tanda tangan
-    Public function insert_signature(){
-        if(isset($_POST['image']) && $_POST['image']) {
-            $img = $_POST['image'];
-            $img = str_replace('data:image/png;base64,', '', $img);
-            $img = str_replace(' ', '+', $img);
-            $data = base64_decode($img);
-            $image=uniqid() . '.png';
-            $file = './signature-image/' .$image;
-            $success = file_put_contents($file, $data);
-	        $image=str_replace('./','',$file);
-            
-	        $this->form_model->insert_single_signature($image);
-        }
+        $this->session->set_flashdata('revs',"Data Ajuan Lembur Ini Direvisi");
+		redirect('pimpinan/form/index');
     }
 }
