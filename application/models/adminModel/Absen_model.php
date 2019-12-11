@@ -6,23 +6,20 @@ class Absen_model extends CI_Model{
         parent::__construct();
         $this->load->database();
     }
-    function daftar_absen(){
-        $this->db->select('*');
-        $this->db->from('absen_lembur');
-        $query = $this->db->get();
-        return $query;
-    }
-    function absen($id_user){
+    function absen(){
         $this->db->select(
             'absen_lembur.*,
             data_pegawai.*,
             jenis_pekerjaan.*,
+            signature.*,
+            signature_absen.date_time as waktu_sign_absen
             '
         );
         $this->db->from('absen_lembur');
         $this->db->join('data_pegawai', 'nip_absen=nip');
         $this->db->join('jenis_pekerjaan','id_jenis=jenis_id');
-        $this->db->where('user_id',$id_user);
+        $this->db->join('signature_absen','absen_id=id_absen','left outer');
+        $this->db->join('signature','id_sign=sign_id','left outer');
         $query = $this->db->get();
         return $query;
     }
@@ -35,18 +32,7 @@ class Absen_model extends CI_Model{
         $query = $this->db->get();
         return $query;
     }
-    function sign($id_user) {
-        $this->db->select('signature.*,data_pegawai.*,absen_lembur.*');
-        $this->db->from('signature_absen');
-        $this->db->join('signature','id_sign=sign_id');
-        $this->db->join('data_pegawai','nip=nip_pgw');
-        $this->db->join('users','id_user=user_id');
-        $this->db->join('absen_lembur','id_absen=absen_id');
-        $this->db->group_by('id_absen');
-        $this->db->where('user_id',$id_user);
-        $query = $this->db->get();
-        return $query;
-    }
+    
     Public function insert_insert($json,$nip_pgw,$absen_id,$form_honor,$jenis_honor){
         $this->db->trans_start();
         // simpan tanda tangan

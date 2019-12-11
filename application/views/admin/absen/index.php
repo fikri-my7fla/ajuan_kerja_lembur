@@ -6,6 +6,7 @@
 	<style>
 		.previewsignx {
 			height: 100px;
+			width: 100px;
 		}
 
 		.previewsignx img {
@@ -39,16 +40,15 @@
 				<div class="card">
 					<div class="card-body">
 						<div class="container-fluid">
-
 							<div class="row">
 								<div class="col-md-12 mb-4">
 									<h5 class="card-title">Absen Lembur Anda</h5>
 								</div>
 							</div>
 							<div class="table-responsive">
-								<table class="table table-hover table-striped table-bordered" id="table">
+								<table class="table table-bordered table-hover table-striped" id="show">
 									<thead>
-										<tr>
+										<tr class="table-light">
 											<th>#</th>
 											<th>Nama Pegawai</th>
 											<th>Jam datang</th>
@@ -57,13 +57,11 @@
 										</tr>
 									</thead>
 									<tbody>
-										<?php 
-										$index=0; 
+										<?php $index=0;
 										foreach ($absen->result() as $ok) { 
-											$index++;
-											?>
+											$index++;?>
 										<tr>
-											<td><?php echo $index; ?></td>
+											<td><?= $index?></td>
 											<td>
 												<?php echo $ok->nama_pegawai;?>
 												<span class="badge text-dark float-right">
@@ -72,52 +70,23 @@
 											</td>
 											<td><?php echo $ok->jam_datang; ?></td>
 											<td><?php echo $ok->jam_pulang; ?></td>
-											<?php if ($sign->num_rows() == 0) { ?>
+											<?php if ($ok->id_sign == 0) { ?>
 											<td>
-												<?php if($ok->user_id == $this->session->userdata('id_user')){?>	
-												<a class="btn btn-secondary btn-rounded btn-sm text-light" type="" id="signabsen" data-absen_id="<?= $ok->id_absen?>"
-													data-form_id="<?= $ok->form_id?>"><span class="fa fa-pencil-alt"></span></a>
+												<?php if($ok->user_id == $this->session->userdata('id_user')){?>
+												<a class="btn btn-secondary btn-rounded btn-sm text-light" type=""
+													id="signabsen" data-absen_id="<?= $ok->id_absen?>"
+													data-form_id="<?= $ok->form_id?>"><span
+														class="fa fa-pencil-alt"></span></a>
 												<?php }?>
 											</td>
 											<?php } else {?>
-											<?php foreach ($sign->result() as $si) { ?>
-											<td class="previewsignx"><img src="<?= $si->sign?>" alt=""></td>
-											<?php }?>
+											<td class="previewsignx">
+												<img src="<?= $ok->sign?>" alt="">
+												<i class="font-10">datetime: <?= $ok->waktu_sign_absen?></i>
+											</td>
 											<?php }?>
 										</tr>
 										<?php }?>
-									</tbody>
-								</table>
-							</div>
-
-							<hr><hr>
-
-							<div class="row">
-								<div class="col-md-12 mb-4 mt-4">
-									<h5 class="card-title">Daftar Absen Lembur</h5>
-								</div>
-							</div>
-							<div class="table-responsive">
-								<table class="table table-hover table-striped table-bordered" id="show">
-									<thead>
-										<tr>
-											<th>#</th>
-											<th>Nama Pegawai</th>
-											<th></th>
-											<th>Jam Datang</th>
-											<th>Jam Pulang</th>
-										</tr>
-									</thead>
-									<tbody>
-										<?php foreach($tabel->result() as $show) :?>
-										<tr>
-											<td><?= $show->id_absen?></td>
-											<td><?= $show->nip_absen?></td>
-											<td><?= $show->form_id?></td>
-											<td><?= $show->jam_datang?></td>
-											<td><?= $show->jam_pulang?></td>
-										</tr>
-										<?php endforeach;?>
 									</tbody>
 								</table>
 							</div>
@@ -175,7 +144,6 @@
 	</script>
 	<script>
 		$(document).ready(function () {
-			$('#table').DataTable();
 			$('#show').DataTable();
 			$(function () {
 				$('[data-toggle="popover"]').popover()

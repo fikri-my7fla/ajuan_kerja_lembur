@@ -22,10 +22,8 @@ class Absen extends MY_Controller{
         $this->breadcrumbs->push('Home','admin/admin');
         $this->breadcrumbs->push('Absen Lembur','admin/absen/index');
         $data['brcm'] = $this->breadcrumbs->show();
-        $data['absen'] = $this->absen_model->absen($id_user);
+        $data['absen'] = $this->absen_model->absen();
         $data['user'] = $this->absen_model->get_pegawai_user($id_user);
-        $data['sign'] = $this->absen_model->sign($id_user);
-        $data['tabel'] = $this->absen_model->daftar_absen();
         $this->load->view('admin/absen/index',$data);
     }
     function tambah(){

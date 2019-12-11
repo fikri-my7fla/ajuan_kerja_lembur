@@ -23,16 +23,9 @@ class Auth extends CI_Controller{
         else {
             //membuat session dengan nama userdata
             $userData = array(
-<<<<<<< HEAD
                 'id_user' => $query->id_user,
                 'username' => $query->username,
                 'password' => $query->password,
-=======
-                'id_user'  => $query->id_user,
-                'username' => $query->username,
-                'password' => $query->password,
-                'nickname' =>$query->nickname,
->>>>>>> adc3525105ef7b45c07361596a2ca948c06e9ff7
                 'type' => $query->type,
                 'nickname' => $query->nickname,
                 'logged_in' => TRUE,

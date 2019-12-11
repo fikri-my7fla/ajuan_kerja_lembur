@@ -18,6 +18,7 @@ class Honor extends MY_Controller {
     }
     //
     public function index(){
+        $id_user = $this->session->userdata('id_user');
         $id_honor = $this->input->post('id_honor',true);
         $this->breadcrumbs->push('Home','admin/admin');
         $this->breadcrumbs->push('Daftar Honor','admin/honor');
@@ -25,6 +26,7 @@ class Honor extends MY_Controller {
         $data['honor'] = $this->honor_model->get_honor();
         $data['tarif'] = $this->honor_model->get_tarif();
         $data['tarif_hnr'] = $this->honor_model->honor_tarif();
+        $data['user'] = $this->honor_model->get_pegawai_user($id_user);
         $this->load->view('admin/honor/index',$data);
     }
     public function tarif_pertama(){
@@ -33,6 +35,7 @@ class Honor extends MY_Controller {
         $this->db->set('tarif_id',$tarif_id);
         $this->db->where('id_honor',$id_honor);
         $this->db->update('daftar_honor');
+        $this->session->set_flashdata('sukses',"Penetapan Jumlah Honor");
         redirect('admin/honor/index');
     }
     public function sebagai_edit(){
@@ -41,6 +44,15 @@ class Honor extends MY_Controller {
         $this->db->set('tarif_id',$tarif_id);
         $this->db->where('id_honor',$id_honor);
         $this->db->update('daftar_honor');
+        $this->session->set_flashdata('sukses',"Penetapan Jumlah Honor");
         redirect('admin/honor/index');
+    }
+    public function tambah(){
+        if(isset($_POST['sign']) && $_POST['sign']) {
+            $json = $_POST['sign'];
+            $nip_pgw = $this->input->post('nip_pgw');
+            $honor_id = $this->input->post('honor_id',true);
+            $this->honor_model->insert_insert($json,$nip_pgw,$honor_id);
+        }
     }
 }
