@@ -25,7 +25,7 @@ class form_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('data_pegawai');
-        $this->db->join('ajuan_lembur', 'pegawai_id=id_data_pegawai');
+        $this->db->join('ajuan_lembur', 'nip=nip_pegawai');
         $this->db->join('form_ajuan_lembur', 'id_form_ajuan=form_id');
         $this->db->where('id_form_ajuan',$id_form_ajuan);
         $query = $this->db->get();
@@ -35,12 +35,12 @@ class form_model extends CI_Model
     //MENAMPILKAN DAFTAR AJUAN LEMBUR
     public function getForm_ajuan()
     {
-        $this->db->select('form_ajuan_lembur.*, count(ajuan_lembur.nip) as pgw, 
-                           data_pegawai.nama_pegawai, jenis_pekerjaan.sub_unit');
+        $this->db->select('form_ajuan_lembur.*, count(ajuan_lembur.nip_pegawai) as pgw, 
+        data_pegawai.nama_pegawai, jenis_pekerjaan.sub_unit');
 		$this->db->from('form_ajuan_lembur');
         $this->db->join('jenis_pekerjaan', 'jenis_id=id_jenis');
         $this->db->join('ajuan_lembur', 'id_form_ajuan=form_id');
-        $this->db->join('data_pegawai', 'data_pegawai.nip=ajuan_lembur.nip');
+        $this->db->join('data_pegawai', 'data_pegawai.nip=ajuan_lembur.nip_pegawai');
 		$this->db->group_by('id_form_ajuan');
 		$query = $this->db->get();
 		return $query;
@@ -99,7 +99,7 @@ class form_model extends CI_Model
                 {
                     $result[] = array(
                         'form_id'    => $id_form_ajuan,
-                        'nip' => $_POST['pegawai'][$key]
+                        'nip_pegawai' => $_POST['pegawai'][$key]
                     );
                 }
 

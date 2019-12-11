@@ -19,7 +19,6 @@ class Honor extends MY_Controller {
     //
     public function index(){
         $id_user = $this->session->userdata('id_user');
-        $id_honor = $this->input->post('id_honor',true);
         $this->breadcrumbs->push('Home','admin/admin');
         $this->breadcrumbs->push('Daftar Honor','admin/honor');
         $data['brcm'] = $this->breadcrumbs->show();

@@ -93,57 +93,11 @@
 
 </script>
 
-<!-- UBAH DATA AJUAN DI HALAMAN DETAIL AJUAN LEMBUR -->
-<script type="text/javascript">
-	$(document).ready(function () {
-		$('.bootstrap-select').selectpicker();
-
-		$('.ubah-record').on('click', function () {
-			var id_form_ajuan = $(this).data('id_form_ajuan');
-			var tanggal = $(this).data('tanggal');
-			$(".strings").val('');
-			$('#ubahModal').modal('show');
-			$('[name="edit_id"]').val(id_form_ajuan);
-
-			$.ajax({
-				url: "<?php echo site_url('member/form/getpegawai_by_form'); ?>",
-				method: "POST",
-				data: {
-					id_form_ajuan: id_form_ajuan
-				},
-				cache: false,
-				success: function (data) {
-					var item = data;
-					var val1 = item.replace("[", "");
-					var val2 = val1.replace("]", "");
-					var values = val2;
-					$.each(values.split(","), function (i, e) {
-						$(".strings option[value='" + e + "']").prop("selected", true).trigger('change');
-						$(".strings").selectpicker('refresh');
-					});
-				}
-			});
-			return false;
-		});
-	});
-
-</script>
-
-
 <script type="text/javascript" src="<?php echo base_url('assets/jquery/sign/js/signature-pad.js');?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/jquery/sign/js/signature_pad.umd.js');?>">
 </script>
 <!-- ttd absen   -->
 <script>
-	$(document).ready(function () {
-		$("#signabsen").on("click", function () {
-			var absen_id = $(this).data('absen_id');
-			var form_id = $(this).data('form_id');
-			$('#sign-modal').modal('show');
-			$('#absen_id').val(absen_id);
-			$('#form_honor').val(form_id);
-		});
-	});
 	$("#signhonor").on("click", function () {
 		var id_honor = $(this).data('id_honor');
 		$('#sign-honor').modal('show');
@@ -155,7 +109,7 @@
 	var wrapper = document.getElementById("signature-pad");
 	var clearButton = wrapper.querySelector("[data-action=clear]");
 	var undoButton = wrapper.querySelector("[data-action=undo]");
-	var saveButton = wrapper.querySelector("[data-action=save]");
+	var simpanButton = wrapper.querySelector("[data-action=simpan]");
 	var signaturePad;
 	var canvas = wrapper.querySelector("canvas");
 	var signaturePad = new SignaturePad(canvas);
@@ -179,34 +133,32 @@
 			signaturePad.fromData(data);
 		}
 	});
-	saveButton.addEventListener("click", function (event) {
-		if (signaturePad.isEmpty()) {
-			$('#sign-modal').modal('show');
-		} else {
-			var url = "<?php echo base_url();?>member/absen/tambah";
-			$('#sign-modal').modal('hide');
-      
-			$.ajax({
-				type: 'POST',
-				url: url,
-				data: {
-					'id_sign': $('#id_sign').val(),
-					'sign': signaturePad.toDataURL('image/svg+xml'),
-					'nip_pgw': $('#nip_pgw').val(),
-					'absen_id': $('#absen_id').val(),
-					'form_honor': $('#form_honor').val(),
-					'jenis_honor': $('#jenis_honor').val()
-				},
+  simpanButton.addEventListener("click", function (event) {
+    if (signaturePad.isEmpty()) {
+      $('sign-honor').modal('show');
+    } else {
+      var url = "<?php echo base_url();?>member/honor/tambah";
+      $('sign-honor').modal('hide');
 
-				// dataType: 'JSON',
-				success: function (data) {
-					document.getElementById("signature-pad").submit();
-					$('#previewsign').html(data);
-				}
-			});
-			signaturePad.clear();
-		}
-	});
+      $.ajax({
+        type: 'POST',
+        url: url,
+        data: {
+          'id_sign': $('#id_sign').val(),
+          'sign': signaturePad.toDataURL('image/svg+xml'),
+          'nip_pgw': $('#nip_pgw').val(),
+          'honor_id': $('#honor_id').val(),
+        },
+
+        // dataType: 'JSON',
+        success: function (data) {
+          document.getElementById("signature-pad").submit();
+          $('#previewsign').html(data);
+        }
+      });
+      signaturePad.clear();
+    }
+  });
 
 </script>
 </body>
