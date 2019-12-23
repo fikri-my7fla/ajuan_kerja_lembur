@@ -143,10 +143,10 @@
 						<a class="dropdown-item" href="javascript:void(0)"><i class="ti-wallet m-r-5 m-l-5"></i> My
 							Balance</a>
 						<a class="dropdown-item" href="javascript:void(0)"><i class="ti-email m-r-5 m-l-5"></i>
-							Inbox</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="javascript:void(0)"><i class="ti-settings m-r-5 m-l-5"></i>
-							Account Setting</a> -->
+							Inbox</a> -->
+						<!-- <div class="dropdown-divider"></div> -->
+						<a class="dropdown-item" href="<?= base_url('authentication/auth/changePassword')?>"><i class="ti-settings m-r-5 m-l-5"></i>
+							Account Setting</a>
 						<div class="dropdown-divider"></div>
 						<form action="<?= base_url('authentication/auth/logout')?>" method="post" id="logoutform">
 							<input type="hidden" name="form_name" value="logoutform">

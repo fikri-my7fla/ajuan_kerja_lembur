@@ -6,6 +6,7 @@ class Auth extends CI_Controller{
     public function __construct()
     {
         parent::__construct();
+        $this->load->helper('form');
         $this->load->model('model_users');
         $this->load->library(array('form_validation', 'Recaptcha'));
     }
@@ -83,6 +84,40 @@ class Auth extends CI_Controller{
         }
     }
 
+    public function changePassword()
+    {
+        $this->load->model('Model_users');
+        $this->cekAkun();
+        $data['title'] = 'Change Password';
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('oldpass', 'old password', 'callback_password_check');
+        $this->form_validation->set_rules('newpass', 'new password', 'required');
+        $this->form_validation->set_rules('passconf', 'confirm password', 'required|matches[newpass]');
+        $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+        if($this->form_validation->run() == false) {
+            $this->load->view('authentication/change',$data);
+        }
+        else {
+            $id = $this->session->userdata('id_user');
+            $newpass = $this->input->post('newpass');
+            $this->Model_users->update_user($id, array('password' => md5($newpass)));
+
+            redirect('authentication/auth/logout');
+        }
+    }
+
+    public function password_check($oldpass)
+    {
+        $this->load->model('Model_users');
+        $id = $this->session->userdata('id_user');
+        $user = $this->Model_users->get_user($id);
+        if($user->password !== md5($oldpass)) {
+            $this->form_validation->set_message('password_check', 'The {field} does not match');
+            return false;
+        }
+
+        return true;
+    }
 
     public function logout(){
     //Menghapus semua session (sesi)

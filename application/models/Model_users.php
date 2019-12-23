@@ -20,5 +20,17 @@ class Model_users extends CI_Model {
         $hash = $query->password;
         if (md5($password) != $hash) return 2;
         return $query;
+    }
+    public function get_user($id)
+    {
+        $this->db->where('id_user', $id);
+        $query = $this->db->get('users');
+        return $query->row();
+    }
+
+    public function update_user($id, $userdata)
+    {
+        $this->db->where('id_user', $id);
+        $this->db->update('users', $userdata);
     } 
 }

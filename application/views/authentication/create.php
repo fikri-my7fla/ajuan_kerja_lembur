@@ -87,10 +87,16 @@
 									<!-- <div class="div_tex">
                                 </div> -->
 								</div>
+
 							</div>
 							<div class="col-12">
+								<div class="form-check">
+									<input type="checkbox" class="form-check-input checkbox" value="I_confirm">
+									<label class="form-check-label" for="exampleCheck1">Check me out</label>
+								</div>
+								<br>
 								<div class="form-group">
-									<a href="<?= base_url('authentication/auth/login'); ?>" class="btn btn-secondary">
+									<a href="<?= base_url('authentication/auth/login'); ?>" class="btn btn-secondary ack">
 										<i class="mdi mdi-arrow-left"></i>
 										Back
 									</a>
@@ -162,6 +168,15 @@
 			$('.pegawai').dropdown();
 		});
 
+		$('.review_form').hide();
+		$('.checkbox').click(function () {
+			if (!$('input[value="I_confirm"]').is(':checked')) //edit the value here to use your own.
+			{
+				$('.review_form').hide();
+			} else {
+				$('.review_form').show();
+			}
+		});
 	</script>
 	<script type="text/javascript">
 		$(document).ready(function () {

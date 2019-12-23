@@ -65,7 +65,7 @@
 								class="ti-user m-r-5 m-l-5"></i> My
 							Profile</a>
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" data-toggle="modal" data-target="#profilEdit" href="#"><i
+						<a class="dropdown-item" href="<?= base_url('authentication/auth/changePassword')?>"><i
 								class="ti-settings m-r-5 m-l-5"></i>
 							Account Setting</a>
 						<!-- <div class="dropdown-divider"></div> -->

@@ -49,7 +49,7 @@
 					<div class="dropdown-menu dropdown-menu-right">
 					<a class="dropdown-item"><i class="icon-calendar"></i> <?= tglIndonesia(date('D, d F Y')); ?></a>
 					<div class="dropdown-divider"></div>
-
+					<a href="<?= base_url('authentication/auth/changePassword')?>" class="dropdown-item"><i class="icon-switch2">Change Pass</i></a>
             <a href="<?= site_url('authentication/auth/logout'); ?>" class="dropdown-item tombol-logout">
             <i class="icon-switch2"></i> Logout</a>
 					</div>
