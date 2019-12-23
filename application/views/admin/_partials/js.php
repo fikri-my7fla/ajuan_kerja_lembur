@@ -3,6 +3,7 @@
 	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
 </script>
 <!-- <script src="< ?= base_url('assets/library/libs/popper.js/dist/umd/popper.min.js'); ?>"></script> -->
+<script type="text/javascript" src="<?= base_url('assets/datatables/js/jquery.dataTables.min.js'); ?>"></script>
 <script src="<?= base_url('assets/bootstrap/js/bootstrap.min.js'); ?>"></script>
 <script src="<?= base_url('assets/library/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js'); ?>"></script>
 <script src="<?= base_url('assets/library/extra-libs/sparkline/sparkline.js'); ?>"></script>
@@ -10,9 +11,6 @@
 <!-- <script type="text/javascript">
 var site_url = "< ?= site_url(); ?>";
 </script> -->
-<script type="text/javascript" src="<?= base_url('assets/datatables/js/jquery.dataTables.min.js'); ?>"></script>
-<!-- <script src="< ?= base_url('assets/js/customtable.js');?>" type="text/javascript"> -->
-
 <script src="<?= base_url('assets/bs-select/bootstrap-select.js'); ?>"></script>
 <script src="<?= base_url('assets/bs-select/image-picker.js'); ?>"></script>
 

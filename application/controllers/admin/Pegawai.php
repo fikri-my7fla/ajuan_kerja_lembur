@@ -33,11 +33,14 @@ class Pegawai extends MY_Controller {
         $this->load->view("admin/datapegawai/tambah",$data);
     }
     public function tambahAksi(){
+        $username = $this->input->post('username',true);
+        $password = $this->input->post('password',true);
+        $type = $this->input->post('type',true);
         $nip = $this->input->post('nip',true);
         $nama_pegawai = $this->input->post('nama_pegawai',true);
         $jenis_id = $this->input->post('jenis_id',true);
 
-        $this->pegawai_model->actionTambah($nip,$nama_pegawai,$jenis_id);
+        $this->pegawai_model->actionTambah($username,$password,$type,$nip,$nama_pegawai,$jenis_id);
         $this->session->set_flashdata('sukses',"Data Berhasil Ditambah");
         redirect('admin/pegawai/index');
     }

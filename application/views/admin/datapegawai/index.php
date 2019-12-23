@@ -40,7 +40,7 @@
 								</div>
 							</div>
 							<div class="table-responsive">
-								<table class="table table-hover table-striped table-bordered" id="pgwTable">
+								<table class="display" style="width:100%" id="pgwTable">
 									<thead>
 										<tr>
 											<th>#</th>
@@ -55,28 +55,25 @@
 										<?php foreach($pgw->result() as $key): 
 											$index++;?>
 										<tr>
-											<td width="5%" class="text-center"><?= $index;?></td>
+											<th width="5%" class="text-center"><?= $index;?></th>
 											<td><?= $key->nip; ?></td>
 											<td><?= $key->nama_pegawai; ?></td>
 											<td><?= $key->sub_unit; ?></td>
-											<td width="10%" class="text-center clearfix">
+											<td width="12%" class="text-center clearfix">
 												<div class="float-left">
 
-													<a data-toggle="modal"
-														data-target="#modal-edit2<?=$key->nip;?>"
-														class="btn btn-warning btn-circle btn-sm text-dark"
-														rel="tooltip" data-tool="tooltip" title="Edit Data">
+													<a data-toggle="modal" data-target="#modal-edit2<?=$key->nip;?>"
+														class="btn btn-warning btn-sm text-dark" >
 														<i class="fa fa-pencil-alt"></i>
 													</a>
-													
+
 												</div>
 												<div class="float-left">
 													<form action="<?php echo site_url('admin/pegawai/hapusAksi');?>"
 														method="POST">
 														<input type="hidden" name="nip_delete" id="nip_delete"
 															value="<?php echo $key->nip;?>">
-														<button class="btn btn-danger btn-circle btn-sm" rel="tooltip"
-															data-toggle="tooltip" title="Hapus Data" name="archive"
+														<button class="btn btn-danger btn-sm"  name="archive"
 															type="submit" onclick="archiveFunction()">
 															<i class="fa fa-trash"></i>
 														</button>

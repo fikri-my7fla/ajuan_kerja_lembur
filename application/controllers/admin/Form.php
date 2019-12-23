@@ -89,6 +89,6 @@ class Form extends MY_Controller{
 		$id_form_ajuan = $this->input->post('delete_id',TRUE);
         $this->form_model->delete_form($id_form_ajuan);
         $this->session->set_flashdata('sukses',"Data Berhasil Dihapus");
-		redirect('admin/form/index');
+		redirect('admin/form');
     }
 }

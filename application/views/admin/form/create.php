@@ -3,6 +3,14 @@
 
 <head>
 	<?php $this->load->view('admin/_partials/head.php') ?>
+	<style>
+	.dropdown-item.active,
+		.dropdown-item:active {
+			color: #fff;
+			text-decoration: none;
+			background-color: #AEB6BF !important;
+		}
+	</style>
 	<title>Tambah Data</title>
 </head>
 
@@ -42,7 +50,7 @@
 									</div>
 									<div class="form-group">
 										<label for="">Sub Unit #</label>
-										<select class="selectpicker" data-live-search="true" data-width="100%"
+										<select class="selectpicker show-tick" data-live-search="true" data-width="100%"
 											data-width="100%" name="jenis_id" title="Pilih Jenis Pekerjaan" required>
 											<?php foreach ($subunit->result() as $sub) { ?>
 											<option value="<?= $sub->id_jenis;?>"><?= $sub->sub_unit ?></option>
@@ -64,10 +72,12 @@
 								<br>
 									<div class="form-group">
 										<label for="">Pengusul</label>
-										<?php foreach ($cape->result() as $banget) { ?>
-										<input type="text" class="form-control bg-light" name="pengusul" id="pengusul"
-											value="<?= $banget->nama_pegawai?>" required>
+										<select class="selectpicker" name="pengusul" id="pengusul" data-width="100%"
+											data-live-search="true" title="Pilih Pengusul" required>
+										<?php foreach ($pegawai->result() as $row) { ?>
+										<option value="<?=$row->nama_pegawai?>"><?=$row->nama_pegawai?></option>
 										<?php } ?>
+										</select>
 									</div>
 									<div class="form-group">
 										<label for="">Pegawai yang akan Lembur #</label>

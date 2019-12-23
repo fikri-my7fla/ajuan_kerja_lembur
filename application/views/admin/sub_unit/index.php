@@ -68,10 +68,10 @@
 							</div>
 							<!-- bungkus tabel nya gan -->
 							<div class="table-responsive">
-								<table class="table table-hover table-striped table-bordered" id="table">
+								<table id="table" class="display" style="width:100%">
 									<thead>
 										<tr>
-											<th width="10%">NO</th>
+											<th width="5%">NO</th>
 											<th>sub unit</th>
 											<th style="text-align: right;">Action</th>
 										</tr>
@@ -81,12 +81,12 @@
 										<?php $index = 1; ?>
 										<?php foreach($jenis_pekerjaan->result() as $jp): ?>
 										<tr>
-											<td width="5%"><?php echo $index++; ?></td>
+											<th class="text-center"><?php echo $index++; ?></th>
 											<td><?php echo $jp->sub_unit; ?></td>
-											<td class="clearfix" width="10%">
+											<td class="clearfix" width="12%">
 												<div class="float-left">
 													<a data-toggle="modal" data-target="#modal-edit<?=$jp->id_jenis;?>"
-														class="btn btn-warning btn-circle btn-sm text-dark"
+														class="btn btn-warning btn-sm text-dark"
 														rel="tooltip" data-tool="tooltip" title="Edit Data"><i
 															class="fa fa-pencil-alt"></i></a>
 												</div>
@@ -95,7 +95,7 @@
 														method="POST">
 														<input type="hidden" name="delete_id" id="delete_id"
 															value="<?php echo $jp->id_jenis;?>">
-														<button class="btn btn-danger btn-circle btn-sm" rel="tooltip"
+														<button class="btn btn-danger btn-sm" rel="tooltip"
 															data-toggle="tooltip" title="Hapus Data" name="archive"
 															type="submit" onclick="archiveFunction()">
 															<i class="fa fa-trash"></i>

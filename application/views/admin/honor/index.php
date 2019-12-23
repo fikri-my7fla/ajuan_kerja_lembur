@@ -15,8 +15,8 @@
 		}
 
 		.previewsignx {
-			height: 100px;
-			width: 100px;
+			height: 62px;
+			width: 62px;
 		}
 
 		.previewsignx img {
@@ -57,15 +57,16 @@
 								</div>
 							</div>
 							<div class="table-responsive">
-								<table id="mytable" class="table table-hover table-striped table-bordered">
+								<table id="mytable" class="display" style="width:100%">
 									<thead>
-										<tr>
-											<th>#</th>
+										<tr class="table-light">
+											<th class="text-center">#</th>
 											<th>Nama Pegawai</th>
 											<th>Sub Unit</th>
 											<th>Sebagai</th>
 											<th>Jumlah Honor</th>
-											<th>Ttd</th>
+											<th>Tanda Tangan</th>
+											<th></th>
 										</tr>
 									</thead>
 									<tbody>
@@ -73,41 +74,52 @@
 										<?php foreach ($honor->result() as $hnr) { 
 											$index++; ?>
 										<tr>
-											<td><?= $index;?></td>
-											<td><?= $hnr->nama_pegawai; ?></td>
-											<td><?= $hnr->sub_unit; ?></td>
+											<!-- no --><th class="text-center"><?= $index;?></th>
+											<!-- nama --><td><?= $hnr->nama_pegawai; ?></td>
+											<!-- sub --><td><?= $hnr->sub_unit; ?></td>
+
 											<?php if ($hnr->tarif_id != null) {?>
-											<td>
+											<!-- sbg --><td>
 												<?= $hnr->tarif_sebagai?>
 												<span class="float-right">|| <a href="#"
 														data-id_honor="<?= $hnr->id_honor?>"
 														data-tarif_sebagai="<?= $hnr->tarif_id?>"
 														class="text-info tarif_btn">Edit</a></span>
 											</td>
-											<td><?= label(); echo currency($hnr->tarif_jumlah);?></td>
+											<!-- hnr --><td><code><?= label(); echo currency($hnr->tarif_jumlah);?></code></td>
 											<?php if($hnr->id_sign == 0){?>
-											<td>
+											<!-- ttd_1 --><td class="previewsignx">
 												<?php if($hnr->user_id == $this->session->userdata('id_user')){?>
-												<button type="button" href="" id="signhonor"
-													data-id_honor="<?= $hnr->id_honor?>">test</button>
+												<button type="" href="" class="btn btn-secondary btn-rounded btn-sm text-light" id="signhonor"
+													data-id_honor="<?= $hnr->id_honor?>"><span
+														class="fa fa-pencil-alt"></span></button>
 												<?php }?>
 											</td>
+											<!-- #1 --><td></td>
 											<?php } else {?>
-											<td class="previewsignx">
+											<!-- ttd_2 --><td class="previewsignx">
 												<img src="<?= $hnr->sign?>" alt="">
-												<i class="font-10">datetime: <?= $hnr->waktu_sign_honor?></i>
+											</td>
+											<!-- #2 --><td width="10%">
+												<i
+													class="font-12"><?php echo date('d M Y', strtotime($hnr->waktu_sign_honor));?></i>
+												<div>
+													<i
+														class="font-10"><?php echo date('H:i:s', strtotime($hnr->waktu_sign_honor));?></i>
+												</div>
 											</td>
 											<?php }?>
 											<?php } else if($hnr->tarif_id == null) { ?>
 
-											<td>
+											<!-- sbg2 --><td>
 												<i>Belum Ditentukan</i>
 												<span class="float-right">|| <a href="#"
 														data-id_honor="<?= $hnr->id_honor?>"
 														class="text-danger honor_btn">Pilih</a></span>
 											</td>
-											<td></td>
-											<td></td>
+											<!-- hnr2 --><td></td>
+											<!-- ttd_3 --><td></td>
+											<!-- #3 --><td></td>
 
 											<?php }?>
 										</tr>
@@ -232,7 +244,9 @@
 	<?php $this->load->view('admin/_partials/js.php'); ?>
 	<script>
 		$(document).ready(function () {
-			$('#mytable').dataTable();
+			$('#mytable').DataTable();
+		})
+		$(document).ready(function () {
 
 			$('.honor_btn').on('click', function () {
 				var id_honor = $(this).data('id_honor');
@@ -315,7 +329,6 @@
 			}
 		});
 
-		
 	</script>
 </body>
 

@@ -3,114 +3,105 @@
 <head>
 	<title>Log in</title>
 	<?php $this->load->view("authentication/_partials/head.php") ?>
-	<style>
-		body {
-			background: -webkit-linear-gradient(bottom, #2dbd6e, #a6f77b);
-			background-repeat: no-repeat;
-		}
-
-		#card {
-			background: #fbfbfb;
-			border-radius: 8px;
-			box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.65);
-			height: 410px;
-			margin: 6rem auto 8.1rem auto;
-			width: 329px;
-		}
-
-		#card-content {
-			padding: 12px 44px;
-		}
-
-		#card-title {
-			font-family: "Raleway Thin", sans-serif;
-			letter-spacing: 4px;
-			padding-bottom: 23px;
-			padding-top: 13px;
-			text-align: center;
-		}
-
-		.underline-title {
-			background: -webkit-linear-gradient(right, #a6f77b, #2ec06f);
-			height: 2px;
-			margin: -1.1rem auto 0 auto;
-			width: 89px;
-		}
-
-		a {
-			text-decoration: none;
-		}
-
-		label {
-			font-family: "Raleway", sans-serif;
-			font-size: 11pt;
-		}
-
-		.form {
-			align-items: left;
-			display: flex;
-			flex-direction: column;
-		}
-
-		.form-border {
-			background: -webkit-linear-gradient(right, #a6f77b, #2ec06f);
-			height: 1px;
-			width: 100%;
-		}
-
-		.form-content {
-			background: #fbfbfb;
-			border: none;
-			outline: none;
-			padding-top: 14px;
-		}
-
-		#submit-btn {
-			background: -webkit-linear-gradient(right, #a6f77b, #2dbd6e);
-			border: none;
-			border-radius: 21px;
-			box-shadow: 0px 1px 8px #24c64f;
-			cursor: pointer;
-			color: white;
-			font-family: "Raleway SemiBold", sans-serif;
-			height: 42.3px;
-			margin: 0 auto;
-			margin-top: 50px;
-			transition: 0.25s;
-			width: 153px;
-		}
-
-		#submit-btn:hover {
-			box-shadow: 0px 1px 18px #24c64f;
-		}
-
-	</style>
+	<link rel="stylesheet" href="<?= base_url('assets/package/dist/sweetalert2.min.css'); ?>" />
 </head>
 
 <body>
-	<div id="card">
-		<div id="card-content">
-			<div id="card-title">
-				<h1>LOGIN</h1>
-				<div class="underline-title"></div>
+	<div class="main-wrapper">
+		<div class="flash_data" data-flashdata="<?= $this->session->flashdata('sukses');?>"></div>
+		<div class="flash_error" data-flasherr="<?= $this->session->flashdata('error');?>"></div>
+		<div class="auth-wrapper d-flex no-block justify-content-center align-items-center bg-dark">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 col-sm-6 col-lg-6 col-xlg-2">
+						<div class="auth-box bg-dark border-top border-secondary">
+							<div class="card text-center">
+								<div class="card-body bg-light">
+									<span class="db"><img src="<?= base_url('assets/Logo.png') ?>" width="20%"
+											alt="logo" /></span>
+									<h2>Aplikasi Web</h2>
+									<h3>Pengajuan Kerja Lembur</h3>
+									<a href="<?= base_url('authentication/direct_form/tambah')?>"><u>
+											<code class="text-info">Direct Form Ajuan</code></u></a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 col-sm-6 col-lg-6 col-xlg-2">
+						<div class="auth-box bg-dark border-top border-secondary">
+							<div id="loginform">
+								<form class="form-horizontal" method="post"
+									action="<?php echo site_url('authentication/auth/login'); ?>" role="login"
+									class="form">
+									<?php if(isset($error)){ echo '<script>alert("'.$error.'");</script>'; } ?>
+									<div class="row">
+										<div class="col-12">
+											<label for="username">Username</label>
+											<div class="input-group mb-1">
+												<div class="input-group-prepend">
+													<span class="input-group-text bg-success text-white"
+														id="basic-addon1"><i class="ti-user"></i></span>
+												</div>
+												<input type="text" class="form-control " name="username"
+													placeholder="Username" aria-label="Username"
+													aria-describedby="basic-addon1" required />
+											</div>
+											<label for="password">Password</label>
+											<div class="input-group mb-3">
+												<div class="input-group-prepend">
+													<span class="input-group-text bg-warning text-white"
+														id="basic-addon2"><i class="ti-pencil"></i></span>
+												</div>
+												<input type="password" class="form-control " name="password"
+													placeholder="Password" autocomplete="on" aria-label="Password"
+													aria-describedby="basic-addon1" required />
+											</div>
+											<?php echo $this->recaptcha->getWidget(); ?><br>
+										</div>
+									</div>
+									<div class="border-top border-secondary">
+										<div class="">
+											<div class="form-group">
+												<button id="submit-btn" type="submit" name="submit"
+													class="btn btn-success float-right" value="login"
+													disabled>Masuk</button>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
-			<form method="post" action="<?php echo site_url('authentication/auth/login'); ?>" role="login" class="form">
-				<?php if(isset($error)){ echo '<script>alert("'.$error.'");</script>'; } ?>
-				<label for="username">Username</label>
-				<input class="form-content" type="text" name="username" style="padding-top:13px" required />
-				<div class="form-border"></div>
-				<br />
-				<label for="password">Password</label>
-				<input class="form-content" type="password" name="password" style="padding-top:13px" required />
-				<div class="form-border"></div>
-
-				<button id="submit-btn" type="submit" name="submit" value="login">Masuk</button>
-
-			</form>
 		</div>
 	</div>
-	<!-- < ?php $this->load->view("authentication/_partials/foot.php") ?> -->
+
 	<?php $this->load->view("authentication/_partials/js.php") ?>
+	<?= $this->recaptcha->getScriptTag();?>
+	<script src="<?= base_url('assets/package/dist/sweetalert2.all.min.js'); ?>"></script>
+	<script>
+		function recaptchaCallback() {
+			$('#submit-btn').removeAttr('disabled');
+		};
+		const flasherror = $('.flash_error').data('flasherr');
+		if (flasherror) {
+			swal.fire({
+				title: 'Failed',
+				text: flasherror,
+				type: 'error'
+			})
+		}
+		const flashData = $('.flash_data').data('flashdata');
+		if (flashData) {
+			swal.fire({
+				title: 'Berhasil',
+				text: flashData,
+				type: 'success'
+			})
+		}
+
+	</script>
 </body>
 
 </html>

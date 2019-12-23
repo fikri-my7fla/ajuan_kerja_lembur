@@ -46,7 +46,7 @@
 							<br>
 
 							<div class="table-responsive-md table-responsive-sm">
-								<table class="table table-hover table-striped table-bordered" id="formAjuan">
+								<table class="display" style="width:100%" id="formAjuan">
 
 									<thead>
 										<tr>
@@ -68,7 +68,7 @@
 											$count++;
 										?>
 										<tr>
-											<td><?php echo $count;?></td>
+											<th width="5%" class="text-center"><?php echo $count;?></th>
 											<td><?php echo $row->tanggal;?></td>
 											<td><?php echo $row->sub_unit;?></td>
 											<td><?php echo $row->pengusul;?></td>
@@ -87,8 +87,7 @@
 												<!-- detail -->
 												<div class="float-left">
 													<a href="<?= base_url('admin/form/detail/') ?><?= $row->id_form_ajuan;?>"
-														class="btn btn-info btn-circle btn-sm text-light" rel="tooltip"
-														data-toggle="tooltip" title="Lihat Detail">
+														class="btn btn-info btn-sm text-light">
 														<span class="fa fa-book"></span>
 													</a>
 												</div>
@@ -96,8 +95,8 @@
 												<!-- edit -->
 												<?php if ($row->status !='2') { ?>
 												<div class="float-left">
-													<a href="#" rel="tooltip" data-toggle="tooltip" title="Edit Data"
-														class=" btn btn-warning btn-circle btn-sm text-dark update-record"
+													<a href="#"
+														class=" btn btn-warning btn-sm text-dark update-record"
 														data-id_form_ajuan="<?php echo $row->id_form_ajuan;?>"
 														data-tanggal="<?php echo $row->tanggal; ?>"
 														data-unit_kerja="<?php echo $row->unit_kerja; ?>"
@@ -116,8 +115,7 @@
 														method="POST">
 														<input type="hidden" name="delete_id" id="delete_id"
 															value="<?php echo $row->id_form_ajuan;?>">
-														<button class="btn btn-danger btn-circle btn-sm" rel="tooltip"
-															data-toggle="tooltip" title="Hapus Data" name="archive"
+														<button class="btn btn-danger btn-sm" name="archive"
 															type="submit" onclick="archiveFunction()">
 															<i class="fa fa-trash"></i>
 														</button>

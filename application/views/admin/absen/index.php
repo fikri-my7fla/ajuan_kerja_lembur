@@ -5,8 +5,8 @@
 	<?php $this->load->view('admin/_partials/head.php') ?>
 	<style>
 		.previewsignx {
-			height: 100px;
-			width: 100px;
+			height: 62px;
+			width: 62px;
 		}
 
 		.previewsignx img {
@@ -42,18 +42,19 @@
 						<div class="container-fluid">
 							<div class="row">
 								<div class="col-md-12 mb-4">
-									<h5 class="card-title">Absen Lembur Anda</h5>
+									<h5 class="card-title">Absen Lembur</h5>
 								</div>
 							</div>
 							<div class="table-responsive">
-								<table class="table table-bordered table-hover table-striped" id="show">
+								<table class="display" style="width:100%" id="show">
 									<thead>
 										<tr class="table-light">
-											<th>#</th>
+											<th class="text-center">#</th>
 											<th>Nama Pegawai</th>
 											<th>Jam datang</th>
 											<th>Jam Pulang</th>
 											<th>Tanda Tangan</th>
+											<th></th>
 										</tr>
 									</thead>
 									<tbody>
@@ -61,17 +62,26 @@
 										foreach ($absen->result() as $ok) { 
 											$index++;?>
 										<tr>
-											<td><?= $index?></td>
+											<th class="text-center"><?= $index?></th>
 											<td>
 												<?php echo $ok->nama_pegawai;?>
 												<span class="badge text-dark float-right">
 													<?= $ok->sub_unit; ?>
 												</span>
 											</td>
-											<td><?php echo $ok->jam_datang; ?></td>
+											<td>
+												<div>
+													<span class="font-12">
+														<?php echo date('D, d M Y',strtotime($ok->jam_datang))?>
+													</span>
+												</div>
+												<span class="font-12">
+													<?php echo date('H:i:s', strtotime($ok->jam_datang));?>
+												</span>
+											</td>
 											<td><?php echo $ok->jam_pulang; ?></td>
 											<?php if ($ok->id_sign == 0) { ?>
-											<td>
+											<td class="previewsignx">
 												<?php if($ok->user_id == $this->session->userdata('id_user')){?>
 												<a class="btn btn-secondary btn-rounded btn-sm text-light" type=""
 													id="signabsen" data-absen_id="<?= $ok->id_absen?>"
@@ -79,10 +89,20 @@
 														class="fa fa-pencil-alt"></span></a>
 												<?php }?>
 											</td>
+											<td></td>
 											<?php } else {?>
 											<td class="previewsignx">
 												<img src="<?= $ok->sign?>" alt="">
-												<i class="font-10">datetime: <?= $ok->waktu_sign_absen?></i>
+											</td>
+											<td width="10%">
+												<i class="font-12">
+													<?php echo date('d M Y', strtotime($ok->waktu_sign_absen));?>
+												</i>
+												<div>
+													<i class="font-10">
+														<?php echo date('H:i:s', strtotime($ok->waktu_sign_absen));?>
+													</i>
+												</div>
 											</td>
 											<?php }?>
 										</tr>

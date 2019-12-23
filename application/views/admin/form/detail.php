@@ -43,7 +43,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="container-fluid">
+			<div class="container-fluid container">
 				<div class="card">
 					<!-- head -->
 					<div class="card-header bg-light mb-4">
@@ -122,14 +122,13 @@
 							<!-- pgw -->
 							<div class="container-fluid">
 								<div>
-									<table class="table table-bordered">
+									<table class="display" id="pgt">
 										<thead>
 											<tr>
+												<th>#</th>
 												<th>
-													<h6>#</h6>
-												</th>
-												<th>
-													<h6>Nama Pegawai</h6>
+													Nama Pegawai
+													<i class="float-right">sub unit</i>
 												</th>
 											</tr>
 										</thead>
@@ -139,10 +138,12 @@
 										foreach ($apa_yah->result() as $oh) : 
 											$index++; ?>
 											<tr>
-												<td><?= $index; ?></td>
+												<th width="5%" class="text-center"><?= $index; ?></th width="5%" class="text-center">
 												<td>
 													<?= $oh->nama_pegawai; ?>
+													<i class="float-right font-12">
 													(<?= $oh->sub_unit; ?>)
+													</i>
 												</td>
 											</tr>
 											<?php endforeach; ?>
@@ -195,6 +196,17 @@
 	</div>
 	<!-- end main wrapper -->
 	<?php $this->load->view('admin/_partials/js.php'); ?>
+	<script>
+		$(document).ready(function () {
+			$('#pgt').dataTable({
+				"paging": false,
+				"ordering": false,
+				"info": false,
+				"searching": false
+			});
+		});
+
+	</script>
 </body>
 
 </html>

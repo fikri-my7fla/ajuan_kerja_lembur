@@ -20,7 +20,8 @@
 					<ul aria-expanded="false" class="collapse  first-level">
 						<li class="sidebar-item"> <a class="sidebar-link waves-effect "
 								href="<?= base_url('admin/subunit/index'); ?>" aria-expanded="false"><i
-									class="mdi mdi-chart-bar"></i><span class="hide-menu">Data Jenis Pekerjaan</span></a>
+									class="mdi mdi-chart-bar"></i><span class="hide-menu">Data Jenis
+									Pekerjaan</span></a>
 						</li>
 						<li class="sidebar-item"> <a class="sidebar-link waves-effect "
 								href="<?= base_url('admin/pegawai/index'); ?>" aria-expanded="false"><i

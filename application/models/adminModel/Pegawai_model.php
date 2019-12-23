@@ -15,7 +15,7 @@ class Pegawai_model extends CI_Model {
         ');
         $this->db->from('data_pegawai');
         $this->db->join('jenis_pekerjaan', 'jenis_pekerjaan.id_jenis = data_pegawai.jenis_id');
-        $this->db->order_by('data_pegawai.nip', 'desc');
+        $this->db->order_by('data_pegawai.nip', 'asc');
 
         return $this->db->get();
     }
@@ -25,13 +25,24 @@ class Pegawai_model extends CI_Model {
         $query = $this->db->get();
         return $query->result();
     }
-    public function actionTambah($nip,$nama_pegawai,$jenis_id){
-        $data = array(
-            "nip"=>$nip,
-            "nama_pegawai"=>$nama_pegawai,
-            "jenis_id"=>$jenis_id
-        );
-        $this->db->insert('data_pegawai',$data);
+    public function actionTambah($username,$password,$type,$nip,$nama_pegawai,$jenis_id){
+        $this->db->trans_start();
+            $vals = array(
+                "username"=>$username,
+                "password"=>md5($password),
+                "type"=>$type,
+                "nickname"=>$nama_pegawai
+            );
+            $this->db->insert('users',$vals);
+            $id_user = $this->db->insert_id();
+            $data = array(
+                "nip"=>$nip,
+                "nama_pegawai"=>$nama_pegawai,
+                "jenis_id"=>$jenis_id,
+                "user_id"=>$id_user
+            );
+            $this->db->insert('data_pegawai',$data);
+        $this->db->trans_complete();
     }
     public function actionEdit($nip,$nama_pegawai,$jenis_id,$edit){
         $data = array(

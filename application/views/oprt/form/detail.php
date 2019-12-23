@@ -3,7 +3,6 @@
 
 <head>
 	<?php $this->load->view('oprt/_partials/head.php') ?>
-	<!-- <link rel="stylesheet" href="< ?= base_url('assets/jquery/sign/css/example.css');?>"> -->
 	<title>Form Ajuan</title>
 </head>
 
@@ -230,12 +229,17 @@
 					</div>
 					<?php }?>
 					<div class="modal-footer">
-						<?php foreach ($ajuan->result() as $stts) { ?>
-						<input type="hidden" name="nip_pgwii[]" id="nip_pgwii" value="<?= $stts->nip_pegawai; ?>">
-						<?php } ?>
-						<input type="hidden" name="stts_id" id="stts_id" value="<?= $prss->id_form_ajuan;?>">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">X</button>
-						<button type="submit" id="btn_save" class="btn btn-primary">Y</button>
+						<div class="form-group">
+							<?php foreach ($ajuan->result() as $stts) { ?>
+							<input type="hidden" name="nip_pgwii[]" id="nip_pgwii" value="<?= $stts->nip_pegawai; ?>">
+							<?php } ?>
+							<input type="hidden" name="stts_id" id="stts_id" value="<?= $prss->id_form_ajuan;?>">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+							<button type="submit" id="btn_save" class="btn btn-primary">Terima</button>
+						</div>
+						<div class="form-group">
+							<?php echo $this->recaptcha->getWidget(); ?>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -306,6 +310,7 @@
 
 
 	<?php $this->load->view('oprt/_partials/js.php'); ?>
+	<?= $this->recaptcha->getScriptTag();?>
 
 	<script type="text/javascript">
 		$(document).ready(function () {

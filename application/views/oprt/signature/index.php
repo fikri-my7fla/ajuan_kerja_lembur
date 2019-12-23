@@ -93,11 +93,6 @@
 							<div class="signature-pad--body">
 								<canvas width="570" height="318"></canvas>
 							</div>
-							<div class="form-group">
-								<?php foreach ($user->result() as $get) { ?>
-								<input type="hidden" name="nip_pgw" id="nip_pgw" value="<?= $get->nip?>">
-								<?php } ?>
-							</div>
 						</div>
 					</div>
 					<div class="modal-footer">
@@ -105,6 +100,9 @@
 							<div class="description">Sign above</div>
 							<div class="signature-pad--actions">
 								<div>
+								<?php foreach ($user->result() as $get) { ?>
+								<input type="hidden" name="nip_pgw" id="nip_pgw" value="<?= $get->nip?>">
+								<?php } ?>
 									<input type="hidden" name="id_sign" id="id_sign" value="">
 									<button type="button" id="save2" class="button" data-action="save"
 										id="save_upd">Save</button>
@@ -163,6 +161,7 @@
 				$('#sign-modal').modal('show');
 			} else {
 				var url = "<?php echo base_url();?>pimpinan/signature/insert_signature";
+				var nip_pgw = $('#nip_pgw').val();
 				$('#sign-modal').modal('hide');
 				$.ajax({
 					type: 'POST',
@@ -170,7 +169,7 @@
 					data: {
 						'id_sign': $('#id_sign').val(),
 						'sign': signaturePad.toDataURL('image/svg+xml'),
-						'nip_pgw': $('#nip_pgw').val()
+						'nip_pgw': nip_pgw
 					},
 					// dataType: 'JSON',
 					success: function (data) {

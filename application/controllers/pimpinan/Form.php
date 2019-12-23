@@ -14,7 +14,8 @@ class Form extends MY_Controller{
             redirect('member/member');
         }
         $this->load->model('oprtModel/Form_model','form_model');
-        $this->load->library('breadcrumbs');
+        $this->load->library('Breadcrumbs','breadcrumbs');
+        $this->load->library(array('form_validation', 'Recaptcha'));
     }
     // tampilan menu ajuan
     function index(){
@@ -54,8 +55,17 @@ class Form extends MY_Controller{
         $form = $this->input->post('form_id',TRUE);
         $id = $this->input->post('stts_id',TRUE);
         $nip_pgwii = $this->input->post('nip_pgwii',TRUE);
-        $this->form_model->proses_absen($sign,$form,$id,$nip_pgwii);
-        redirect('pimpinan/form/index');
+        $recaptcha = $this->input->post('g-recaptcha-response');
+        $response = $this->recaptcha->verifyResponse($recaptcha);
+        if (isset($response['success']) and $response['success'] === true) {
+            $this->form_model->proses_absen($sign,$form,$id,$nip_pgwii);
+            $this->session->set_flashdata('success',"Complete Acc Form Ajuan");
+            redirect('pimpinan/form/index');
+        } else {
+            $this->session->set_flashdata('error',"Captcha Error");
+            redirect('pimpinan/form/index');
+
+        }
     }
     // ctllr ditolak
     function proses3(){
