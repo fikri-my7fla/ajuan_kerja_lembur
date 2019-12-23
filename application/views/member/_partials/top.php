@@ -1,9 +1,8 @@
-
-	<!-- Main navbar -->
-	<div class="navbar navbar-expand-md navbar-dark">
+<!-- Main navbar -->
+<div class="navbar navbar-expand-md navbar-dark">
 		<div class="navbar-brand">
 			<a href="<?= site_url('member/member'); ?>" class="d-inline-block">
-				<img src="<?= base_url('assets/members/'); ?>global_assets/images/logo_light.png" alt="">
+				<img src="<?= base_url('assets/members/'); ?>global_assets/images/logo_brand.png" alt="">
 			</a>
 		</div>
 
@@ -27,10 +26,6 @@
 				
 			</ul>
 
-			<!-- <span class="navbar-text ml-md-3 mr-md-auto">
-				<span class="badge bg-success">Online</span>
-			</span> -->
-
 			<ul class="navbar-nav ml-auto">
 
 				<li class="nav-item dropdown dropdown-user">
@@ -38,9 +33,23 @@
 						<span><?= $this->session->userdata('username'); ?> | <i><?= $this->session->userdata('type'); ?></i></span>
 					</a>
 
+					<?php date_default_timezone_set("Asia/Jakarta");
+	
+					function tglIndonesia($str){
+						$tr   = trim($str);
+						$str    = str_replace(array('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'January', 
+						'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 
+						'November', 'December'), 
+						array('Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jum\'at', 'Sabtu', 'Januari', 'Februari', 
+						'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'), 
+						$tr);
+						return $str;
+					} ?>
+
 					<div class="dropdown-menu dropdown-menu-right">
-						<a href="#" class="dropdown-item"><i class="icon-user-plus"></i> My profile</a>
-						<div class="dropdown-divider"></div>
+					<a class="dropdown-item"><i class="icon-calendar"></i> <?= tglIndonesia(date('D, d F Y')); ?></a>
+					<div class="dropdown-divider"></div>
+
             <a href="<?= site_url('authentication/auth/logout'); ?>" class="dropdown-item tombol-logout">
             <i class="icon-switch2"></i> Logout</a>
 					</div>

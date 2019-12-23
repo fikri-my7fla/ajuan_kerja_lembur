@@ -1,7 +1,5 @@
 <?php
-
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 class Form extends MY_Controller
 {
     public function __construct()
@@ -17,7 +15,6 @@ class Form extends MY_Controller
         $this->load->model('membersModel/form_model', '', TRUE);
         $this->load->helper(array('form', 'url'));
     }
-
     //TAMPILAN DAFTAR AJUAN LEMBUR
     public function index()
     {
@@ -33,7 +30,6 @@ class Form extends MY_Controller
         $this->load->view('member/form/index', $data);
         $this->load->view('member/_partials/foot');
     }
-
     //TAMPILAN HALAMAN TAMBAH AJUAN LEMBUR
     public function tambah()
     {
@@ -50,7 +46,6 @@ class Form extends MY_Controller
         $this->load->view('member/form/tambah', $data);
         $this->load->view('member/_partials/foot');
     }
-
     //PROSES TAMBAH AJUAN LEMBUR
     public function create()
     {
@@ -65,7 +60,6 @@ class Form extends MY_Controller
         $this->session->set_flashdata('message', 'ditambahkan');
         redirect('member/form');
     }
-
     //AMBIL DATA PEGAWAI BY FORM
     public function getpegawai_by_form()
     {
@@ -76,13 +70,11 @@ class Form extends MY_Controller
         }
         echo json_encode($value);
     }
-
     //Ubah Data Di Rekapan Ajuan
     public function update()
     {
         $id      = $this->input->post('edit_id', TRUE);
         $pegawai = $this->input->post('pegawai_edit', TRUE);
-
         $this->form_model->update_form($id, $pegawai);
         $this->session->set_flashdata('message', 'diubah');
         redirect('member/form');
@@ -96,9 +88,7 @@ class Form extends MY_Controller
         $data['pgw']               = $this->form_model->getdetail_pegawai($id_form_ajuan);
         $data['pegawai']           = $this->form_model->getPegawai();
         $data['dtl_pengusul']      = $this->form_model->getdetailPengusul();
-        // $data['signature1']        = $this->form_model->preview_signature1($id_form_ajuan);
-        // $data['signature2']        = $this->form_model->preview_signature2($id_form_ajuan);
-
+        $data['sign1'] = $this->form_model->show_sign1_data($id_form_ajuan);
         $this->load->view('member/_partials/head', $data);
         $this->load->view('member/_partials/top', $data);
         $this->load->view('member/_partials/side', $data);
@@ -106,24 +96,20 @@ class Form extends MY_Controller
         $this->load->view('member/form/detail', $data);
         $this->load->view('member/_partials/foot');
     }
-
     //Ubah Data Di Detail Ajuan
     public function ubah()
     {
         $id      = $this->input->post('edit_id', TRUE);
         $pegawai = $this->input->post('pegawai_edit', TRUE);
-
         $this->form_model->update_form($id, $pegawai);
         // header('Location: detail/'.$id);
         $this->session->set_flashdata('message', 'diubah');
         redirect('member/form/detail/'.$id);
     }
-
     //Untuk Proses Tanda Tangan
     Public function insert_sig()
     {
         $id = $this->input->post('form_id', TRUE);
-
         if(isset($_POST['image']) && $_POST['image']) 
         {
             $nama    = $_POST['signname'];

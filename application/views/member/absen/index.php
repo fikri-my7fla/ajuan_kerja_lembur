@@ -55,7 +55,9 @@
             foreach($absen_lembur->result() as $absen) { ?>
 				<tr>
 					<td><?= $no++; ?></td>
-					<td><?= $absen->nama_pegawai; ?></td>
+					<td><?= $absen->nama_pegawai; ?>
+						<span class="badge text-black-50 float-right"><?= $absen->sub_unit; ?></span>
+					</td>
 					<td><?= $absen->jam_datang; ?></td>
 					<td><?= $absen->jam_pulang; ?></td>
 					<?php if ($absen->id_sign == 0) { ?>
@@ -78,11 +80,11 @@
 		</table>
 
 	</div>
-    <!-- /content area -->
-    
-    <!-- modal ttd absen -->
+	<!-- /content area -->
 
-    <div class="modal fade" id="sign-modal" tabindex="-1" role="dialog" aria-hidden="true">
+	<!-- modal ttd absen -->
+
+	<div class="modal fade" id="sign-modal" tabindex="-1" role="dialog" aria-hidden="true">
 		<form action="" method="post" id="signature-pad">
 			<div class="modal-dialog">
 				<div class="modal-content" id="signature-pad">

@@ -34,11 +34,9 @@
 				height: 100px;
 				width: 100px;
 			}
-
 			.previewsignx img {
 				max-height: 100%;
 			}
-
 		</style>
 		<table class="table-hover" id="Table" style="width:100%">
 			<thead>
@@ -66,7 +64,7 @@
 					<?php if($hnr->id_sign == 0){?>
 					<td>
 						<?php if($hnr->user_id == $this->session->userdata('id_user')){?>
-						<button type="button" href="" id="signhonor" data-id_honor="<?= $hnr->id_honor?>">test</button>
+						<button type="button" class="btn btn-sm btn-secondary" href="" id="signhonor" data-id_honor="<?= $hnr->id_honor?>">ttd</button>
 						<?php }?>
 					</td>
 					<?php } else {?>
@@ -75,7 +73,7 @@
 						<i class="font-10">datetime: <?= $hnr->waktu_sign_honor?></i>
 					</td>
 					<?php }?>
-					<?php } else if($hnr->tarif_id == null) { ?>
+					<?php } elseif($hnr->tarif_id == 0) { ?>
 
 					<td>
 						<i>Belum Ditentukan</i>

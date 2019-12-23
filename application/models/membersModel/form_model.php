@@ -1,6 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 class form_model extends CI_Model
 {
     public function __construct()
@@ -19,7 +18,6 @@ class form_model extends CI_Model
         $query = $this->db->get();
         return $query->result();
     }
-
     //AMBIL DATA PEGAWAI BY FORM
     public function getpegawai_by_form($id_form_ajuan)
     {
@@ -29,9 +27,8 @@ class form_model extends CI_Model
         $this->db->join('form_ajuan_lembur', 'id_form_ajuan=form_id');
         $this->db->where('id_form_ajuan',$id_form_ajuan);
         $query = $this->db->get();
-        return $query;
+        return $query->result();
     }
-
     //MENAMPILKAN DAFTAR AJUAN LEMBUR
     public function getForm_ajuan()
     {
@@ -45,7 +42,6 @@ class form_model extends CI_Model
 		$query = $this->db->get();
 		return $query;
     }
-
     //AMBIL DATA SUB UNIT
     public function getsub_unit()
     {
@@ -54,7 +50,6 @@ class form_model extends CI_Model
         $query = $this->db->get();
         return $query->result();
     }
-
     public function getPengusul()
     {
         $this->db->select('users.*, data_pegawai.nama_pegawai');
@@ -64,7 +59,6 @@ class form_model extends CI_Model
         $query = $this->db->get();
         return $query->result();
     }
-
     public function getdetailPengusul()
     {
         $this->db->select('form_ajuan_lembur.pengusul, users.id_user, data_pegawai.nama_pegawai');
@@ -74,7 +68,6 @@ class form_model extends CI_Model
         $query = $this->db->get();
         return $query->result();
     }
-
     //PROSES TAMBAH AJUAN LEMBUR
     public function create_form($tanggal,$unit_kerja,$jenis_id,$hasil, $alasan, $pegawai, $pengusul)
     {
@@ -91,7 +84,6 @@ class form_model extends CI_Model
                 
             );
             $this->db->insert('form_ajuan_lembur', $data);
-
             //GET ID PEGAWAI
             $id_form_ajuan = $this->db->insert_id();
             $result = array();
@@ -102,25 +94,20 @@ class form_model extends CI_Model
                         'nip_pegawai' => $_POST['pegawai'][$key]
                     );
                 }
-
             //MULTIPLE INSERT TO AJUAN_LEMBUR
             $this->db->insert_batch('ajuan_lembur', $result);
         $this->db->trans_complete();
     }
-
     //PROSES UBAH AJUAN LEMBUR
     public function update_form($id, $pegawai)
     {
         $this->db->trans_start();
-
             $data = array(
                 'status' => '1'
             );
             $this->db->where('id_form_ajuan',$id);
 			$this->db->update('form_ajuan_lembur', $data);
-
             $this->db->delete('ajuan_lembur', array('form_id' => $id));
-
             $result = array();
                 foreach($pegawai as $key => $val)
                 {
@@ -133,7 +120,6 @@ class form_model extends CI_Model
             $this->db->insert_batch('ajuan_lembur', $result);
         $this->db->trans_complete();
     }
-
     //AMBIL DATA AJUAN BY ID FORM AJUAN
     public function getform_ajuan_by_id($id_form_ajuan)
     {
@@ -144,13 +130,25 @@ class form_model extends CI_Model
         $query = $this->db->get();
         return $query->result();
     }
-
+    function show_sign1_data($id_form_ajuan){
+        $this->db->select('
+            signature.*,
+            data_pegawai.nama_pegawai
+        ');
+		$this->db->from('signature_ppk');
+		$this->db->join('form_ajuan_lembur','id_form_ajuan=form_id');
+		$this->db->join('signature','id_sign=sign_id');
+		$this->db->join('data_pegawai','nip_pgw=nip');
+		$this->db->where('id_form_ajuan',$id_form_ajuan);
+        $query = $this->db->get();
+        return $query; 
+    }
     //AMBIL DATA PEGAWAI DI HALAMAN DETAIL
     public function getdetail_pegawai($id_form_ajuan)
     {
         $this->db->select('data_pegawai.*, jenis_pekerjaan.sub_unit');
         $this->db->from('data_pegawai');
-        $this->db->join('ajuan_lembur', 'ajuan_lembur.nip=data_pegawai.nip');
+        $this->db->join('ajuan_lembur', 'ajuan_lembur.nip_pegawai=data_pegawai.nip');
         $this->db->join('form_ajuan_lembur', 'id_form_ajuan=form_id');
         $this->db->join('jenis_pekerjaan', 'data_pegawai.jenis_id=jenis_pekerjaan.id_jenis');
         $this->db->where('id_form_ajuan', $id_form_ajuan);
@@ -158,7 +156,6 @@ class form_model extends CI_Model
         $query = $this->db->get();
         return $query->result();
     }
-
     //Proses Insert Signature (Tanda Tangan)
     Public function insert_signature($image)
     {
@@ -184,7 +181,6 @@ class form_model extends CI_Model
             }
         return ($this->db->affected_rows()!=1)?false:true;
     }
-
     //Ambil Tanda Tangan
     public function get_sign()
     {
@@ -193,7 +189,6 @@ class form_model extends CI_Model
             );
         return $this->db->get_where('signature',$data)->num_rows();
     }
-
     //Untuk Menampilkan tanda tangan 1
     public function preview_signature1($id_form_ajuan)
     {
@@ -205,7 +200,6 @@ class form_model extends CI_Model
         $query = $this->db->get();
         return $query;
     }
-
     //Untuk menampilkan tanda tangan 2
     public function preview_signature2($id_form_ajuan)
     {
@@ -217,5 +211,4 @@ class form_model extends CI_Model
         $query = $this->db->get();
         return $query;
     }
-
 }

@@ -5,6 +5,8 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<title><?= $title; ?></title>
+	
+	<link rel="icon" type="image/png" href="<?= base_url('assets/members/img/') ?>logo.png"/>
 
 	<!-- Global stylesheets -->
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
@@ -28,6 +30,24 @@
   
   <!-- preloader -->
   <link rel="stylesheet" href="<?= base_url('assets/members/'); ?>css/preloader.css">
+
+  <style type="text/css">
+		.previewsign {
+			height: 129px;
+		}
+		.previewsign img {
+			max-height: 100%;
+		}
+		.typed {
+			height: 55px;
+			margin: 0;
+			padding: 0 3px;
+			z-index: 90;
+			cursor: default;
+			font: 1.875em/50px "Journal", Georgia, Times, serif;
+			font-size: 15px;
+		}
+	</style>
 
 </head>
 

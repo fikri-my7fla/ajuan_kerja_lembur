@@ -1,67 +1,68 @@
+<!-- Main content -->
+<div class="content-wrapper">
+
+<!-- Page header -->
+<div class="page-header page-header-light">
+    <div class="page-header-content header-elements-md-inline">
+        <div class="page-title d-flex">
+            <h4><a class="text-dark" href="<?= site_url('member/form'); ?>" data-toggle="tooltip" 
+            title="Ajuan Lembur">
+            <i class="icon-arrow-left52 mr-2"></i></a> <span class="font-weight-semibold">
+            Detail</span> - Ajuan Lembur</h4>
+            <a href="#" class="header-elements-toggle text-default d-md-none">
+        </div>
+
+        <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
+            <div class="d-flex">
+                <div class="breadcrumb ml-auto">
+                    <a href="<?= site_url('member/member'); ?>" class="breadcrumb-item mr-2" data-toggle="tooltip"
+                    title="Dashboard" data-placement="bottom">
+                    <i class="icon-home2 mr-2"></i> Home</a>
+                    <div class="breadcrumb-item dropdown no-arrow p-0">
+                        <a href="#" class="breadcrumb-item dropdown-toggle" data-toggle="dropdown">
+                            Ajuan Lembur
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a href="<?= site_url('member/form/tambah'); ?>" class="dropdown-item"><i class="icon-quill4"></i> Tambah Ajuan Lembur</a>
+                            <div class="dropdown-divider"></div>
+                            <a href="<?= site_url('member/form') ?>" class="dropdown-item"><i class="icon-list2"></i> Daftar Ajuan Lembur</a>
+                        </div>
+                    </div>
+                    <a href="<?= site_url('member/form'); ?>" class="breadcrumb-item" data-toggle="tooltip"
+                    title="Daftar Ajuan Lembur" data-placement="bottom">Daftar Ajuan Lembur</a>
+                    <span class="breadcrumb-item active">Detail Ajuan Lembur</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /page header -->
 
 
-		<!-- Main content -->
-		<div class="content-wrapper">
+    <!-- Content area -->
+    <div class="content">
 
-			<!-- Page header -->
-			<div class="page-header page-header-light">
-				<div class="page-header-content header-elements-md-inline">
-					<div class="page-title d-flex">
-                        <h4><a class="text-dark" href="<?= site_url('member/form'); ?>" data-toggle="tooltip" 
-                        title="Ajuan Lembur">
-                        <i class="icon-arrow-left52 mr-2"></i></a> <span class="font-weight-semibold">
-						Detail</span> - Ajuan Lembur</h4>
-						<a href="#" class="header-elements-toggle text-default d-md-none">
-					</div>
-
-					<div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
-						<div class="d-flex">
-							<div class="breadcrumb ml-auto">
-                                <a href="<?= site_url('member/member'); ?>" class="breadcrumb-item mr-2" data-toggle="tooltip"
-                                title="Dashboard" data-placement="bottom">
-                                <i class="icon-home2 mr-2"></i> Home</a>
-                                <div class="breadcrumb-item dropdown no-arrow p-0">
-                                    <a href="#" class="breadcrumb-item dropdown-toggle" data-toggle="dropdown">
-                                        Ajuan Lembur
-                                    </a>
-
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a href="<?= site_url('member/form/tambah'); ?>" class="dropdown-item"><i class="icon-quill4"></i> Tambah Ajuan Lembur</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a href="<?= site_url('member/form') ?>" class="dropdown-item"><i class="icon-list2"></i> Daftar Ajuan Lembur</a>
-                                    </div>
-                                </div>
-                                <a href="<?= site_url('member/form'); ?>" class="breadcrumb-item" data-toggle="tooltip"
-                                title="Daftar Ajuan Lembur" data-placement="bottom">Daftar Ajuan Lembur</a>
-								<span class="breadcrumb-item active">Detail Ajuan Lembur</span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- /page header -->
-
-
-			<!-- Content area -->
-			<div class="content">
-
-				<!-- Card - Detail Ajuan Lembur -->
-                <div class="card mt-4 shadow">
-
-                <!-- Untuk Memanggil Flashdata SweetAlert -->
+    <!-- Untuk Memanggil Flashdata SweetAlert -->
     <div class="flash-data" data-flashdata="<?= $this->session->flashdata('message'); ?>"></div>
+
+    <div class="text-right">
+    <a href="<?= base_url('member/form'); ?>"><i class="text-dark icon-undo2" data-toggle="tooltip"
+    title="Kembali" data-placement="bottom"></i></a>
+    </div>
+
+    <!-- Card - Detail Ajuan Lembur -->
+    <div class="card mt-4 shadow">
     
     <!-- Card Header - Detail Ajuan Lembur -->
     <?php foreach($form_ajuan_lembur as $form) : ?>
     <div class="card-header mt-2">
             
-        <img src="<?= base_url('assets/members/img/'); ?>/logo.png" alt="" srcset="" width="105" height="105" 
+        <img src="<?= base_url('assets/members/img/'); ?>/logo.png" alt="" srcset="" width="100" height="100" 
             style="float:left">
-        <h2>
-            <b>Lembaga Ilmu Pengetahuan Indonesia</b>
+        <h2 class="mt-2">
+            <b><u>Lembaga Ilmu Pengetahuan Indonesia</u></b>
         </h2>
-
-        <hr width="79%">
 
         <h5><b>INDONESIAN INSTITUTE OF SCIENCE</b></h5>
     </div>
@@ -171,76 +172,34 @@
 
         </div>
 
-
-        <div class="row">
-
-            <!-- Signature1 - Pejabat Pembuat Komitmen -->
-            <!-- <div class="col">
-                <div class="text-center">
-                    <b><i>Pejabat Pembuat Komitmen</i></b>
-
-                        <div class="card-body">
-                        < ?php foreach ($signature1->result() as $sign1) { ?>
-                            <!-- Menampilkan Signature1 -->
-                            <!-- <div class="previewsign">
-                                <img src="< ?= base_url();?>< ?= $sign1->img; ?>" width="200px" alt="">
-                            </div> -->
-                            <!-- Menampilkan Nama Pembuat Signature1 -->
-                            <!-- <div class="typed">
-                                <u>< ?= $sign1->signname;?></u>
-                            </div>
-                        < ?php } ?>
-                        </div> -->
-
-                        <!-- < ?php if($signature1 !== false && $signature1->num_rows() > 0){
-                        } else {
-                            echo "<button class='btn btn-secondary btn-sm signbtn' type='button'
-                            id='sbnt1'>Tanda Tangan</button>";
-                        }?> -->
-
-                <!-- </div>
-            </div> -->
-
-            <!-- Signature2 - Kepala Subbagian -->
-            <!-- <div class="col">
-                <div class="text-center">
-                    <b><i>Kepala Subbagian</i></b>
-
-                        <div class="card-body">
-                        < ?php foreach ($signature2->result() as $sign2) { ?> -->
-                            <!-- Menampilkan Signature2 -->
-                            <!-- <div class="previewsign">
-                                <img src="< ?= base_url();?>< ?= $sign2->img; ?>" width="200px" alt="">
-                            </div> -->
-                            <!-- Menampilkan Nama Pembuat Signature2 -->
-                            <!-- <div class="typed">
-                                <u>< ?= $sign2->signname;?></u>
-                            </div>
-                        < ?php } ?>
-                        </div> -->
-
-                        <!-- < ?php if($signature2 !== false && $signature2->num_rows() > 0){
-                        } else {
-                            echo "<button class='btn btn-secondary btn-sm signbtn' type='button'
-                            id='sbnt2'>Tanda Tangan</button>";
-                        }?> -->
-
-                <!-- </div>
-            </div> -->
-
-        </div>
-
         <br/>
 
+        <!-- signature -->
+        <div>
+            <div class="row">
 
-        <!-- Button Edit -->
-        <!-- <hr>
-        <div class="text-right">
-            <button type="button" class="btn btn-primary ubah-record" data-id_form_ajuan="<?= $form->id_form_ajuan; ?>">
-            Edit Ajuan Lembur<i class="fas fa-fw fa-tools"></i></button>
-        </div> -->
+                <div class="col">
+                    <div class="text-center">
+                        <h6>Pejabat Pembuat Komitmen</h6>
+                        <!-- signature 1 -->
+                        <div>
+                            <?php foreach ($sign1->result() as $view) { ?>
+                            <div class="previewsign">
+                                <img src="<?= $view->sign; ?>" alt="">
+                            </div>
+                            <div>
+                                <div class="typed"><i><?= $view->nama_pegawai;?></i></div>
+                            </div>
+                            <?php }?>
+                        </div>
+                        <!-- end sign1 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <?php foreach ($form_ajuan_lembur as $ajuan) { ?>
-        <?php if( $ajuan->status == 3) {
+        <?php if( $ajuan->status == 4) {
         echo "<hr><div class='text-right'>
               <button type='button' class='btn btn-primary ubah-record' data-id_form_ajuan='". $ajuan->id_form_ajuan ."'>
               Edit Ajuan Lembur<i class='fas fa-fw fa-tools'></i></button>
@@ -330,7 +289,6 @@
 
         <!-- Order options -->
         <!-- <div class="mb-4">
-
             <div class="input-group">
                 <select name="pegawai_edit[]" class="form-control multiselect-order-options" multiple="multiple" data-fouc>
                     <option value="kejo">Cheese</option>
@@ -340,7 +298,6 @@
                     <option value="pepperoni">Pepperoni</option>
                     <option value="onions">Onions</option>
                 </select>
-
                 <div class="input-group-append">
                     <button type="button" class="btn bg-blue multiselect-order-options-button">Order</button>
                 </div>
@@ -417,5 +374,3 @@
 		<!-- /.modal-dialog -->
     </div>
 </form>
-
-			

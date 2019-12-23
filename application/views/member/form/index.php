@@ -58,10 +58,10 @@
             <tr>
                 <th>No</th>
                 <th>Tanggal</th>
-                <th>Unit Kerja</th>
                 <th>Sub Unit</th>
-                <th>Status</th>
+                <th>Pengusul</th>
                 <th>Pegawai</th>
+                <th>Status</th>
                 <th class="text-center">Action</th>
             </tr>
         </thead>
@@ -72,8 +72,10 @@
             <tr class="text-capitalize">
                 <td><?= $no++ ?></td>
                 <td><?= $lembur->tanggal ?></td>
-                <td><?= $lembur->unit_kerja ?></td>
                 <td><?= $lembur->sub_unit ?></td>
+                <td><?= $lembur->pengusul ?></td>
+                <td><span><?= $lembur->pgw ?> 
+                Pegawai</span></td>
                 <td>
                     <?php if ($lembur->status == 1) { echo '<h5><i class="badge badge-primary col-10">
                         PROSES <i class="icon-spinner ml-1"></i></i></h5>';
@@ -85,8 +87,6 @@
                         DI REVISI <i class="icon-cog2 ml-1"></i></i></h5>';
                     } ?>
                 </td>
-                <td><span><?= $lembur->pgw ?> 
-                Pegawai</span></td>
                 <td>
                     <div class="text-center">
                     <a href="<?= site_url('member/form/detail/'); ?><?= $lembur->id_form_ajuan; ?>" 
@@ -101,5 +101,3 @@
 
 </div>
 <!-- /content area -->
-
-
